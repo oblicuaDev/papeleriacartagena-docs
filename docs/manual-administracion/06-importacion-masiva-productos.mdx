@@ -1,0 +1,83 @@
+---
+sidebar_position: 6
+title: Importación masiva de productos
+description: Cómo cargar productos en lote desde un archivo Excel o CSV.
+---
+
+# Importación masiva de productos
+
+La plataforma permite cargar o actualizar el catálogo en lote a partir de un archivo Excel (`.xlsx`, `.xls`) o CSV, en lugar de crear los productos uno por uno.
+
+**Ubicación:** botón **"Importar Excel"** en `/admin/catalogo`.
+
+## Formato del archivo
+
+El archivo debe tener los datos en la **primera hoja**, con una fila de encabezados. El sistema reconoce los siguientes nombres de columna (no distingue mayúsculas/minúsculas ni espacios adicionales):
+
+| Dato | Nombres de columna aceptados | Obligatorio |
+|---|---|---|
+| SKU | `SKU`, `Código`, `Codigo`, `Ref`, `Referencia` | Sí |
+| Nombre | `Nombre`, `Name`, `Producto` | Sí |
+| Categoría | `Categoría`, `Categoria`, `Category` | Sí (debe existir previamente) |
+| Descripción | `Descripción`, `Descripcion`, `Description`, `Desc` | No |
+| Precio Base | `Precio Base`, `Precio`, `Price`, `basePrice`, `Valor` | Sí |
+| Stock | `Stock`, `Inventario`, `Cantidad` | No (por defecto 0) |
+| Unidad | `Unidad`, `Unit`, `Unidad de medida` | No (por defecto "Unidad") |
+
+**Unidades válidas:** Unidad, Resma, Caja, Paquete, Pliego, Set, Rollo. Si el valor de la columna Unidad no coincide con ninguna de estas, se asigna "Unidad" automáticamente.
+
+:::warning Antes de importar
+Las **categorías** referenciadas en el archivo deben existir previamente en el sistema (ver [Administración de categorías](./04-administracion-categorias.mdx)). El nombre de la categoría en el archivo debe coincidir con el nombre registrado (no distingue mayúsculas/minúsculas, pero sí debe ser el mismo texto). Crear primero las categorías necesarias si el archivo incluye alguna nueva.
+:::
+
+## Proceso de importación paso a paso
+
+La importación se realiza en tres pasos: **Cargar**, **Previsualizar** e **Importar**.
+
+### 1. Cargar el archivo
+
+1. En `/admin/catalogo`, hacer clic en **"Importar Excel"**.
+2. En el modal, revisar el recordatorio de columnas esperadas y la lista de categorías y unidades disponibles en el sistema.
+3. Arrastrar el archivo al área indicada, o hacer clic para seleccionarlo desde el equipo (formatos aceptados: `.xlsx`, `.xls`, `.csv`).
+
+> 🖼️ **CAPTURA:** Paso 1 del modal de importación ("Arrastra tu archivo aquí o selecciona un archivo") con el recordatorio de columnas esperadas.
+
+### 2. Revisar la previsualización
+
+El sistema procesa el archivo en el navegador y muestra una tabla de previsualización con una fila por producto del archivo, indicando:
+
+- Cuántas filas son **válidas** (✓) y cuántas tienen **errores** (⚠).
+- Por cada fila: número de fila, SKU, Nombre, Categoría, Precio y su estado.
+- Las filas con error se resaltan y muestran el detalle del problema, por ejemplo:
+  - "SKU requerido"
+  - "Nombre requerido"
+  - "Categoría '`{nombre}`' no encontrada"
+  - "Precio base inválido"
+
+> 🖼️ **CAPTURA:** Paso 2 del modal de importación, tabla de previsualización con filas válidas y filas con error.
+
+Es importante revisar esta previsualización antes de continuar: **las filas con errores no se importan**, solo las filas válidas.
+
+### 3. Confirmar la importación
+
+1. Hacer clic en **"Importar `{N}` producto(s)"** (el número refleja únicamente las filas válidas).
+2. El sistema crea los productos uno a uno. Si alguno falla al guardarse en el servidor (por ejemplo, por un SKU ya existente), esa fila se marca con el error correspondiente y el proceso continúa con las demás.
+3. Al finalizar, se muestra la pantalla de confirmación con el total de productos importados y el catálogo se actualiza automáticamente.
+
+> 🖼️ **CAPTURA:** Paso 3 del modal de importación, pantalla de confirmación "`{N}` producto(s) importado(s)".
+
+4. Hacer clic en **"Cerrar"** para volver al catálogo.
+
+## Errores comunes y solución
+
+| Error mostrado | Causa | Solución |
+|---|---|---|
+| "SKU requerido" | La celda de SKU está vacía en esa fila. | Completar el SKU en el archivo original y volver a intentar la importación de esa fila. |
+| "Nombre requerido" | La celda de Nombre está vacía. | Completar el nombre del producto. |
+| "Categoría '`{nombre}`' no encontrada" | El texto de la columna Categoría no coincide con ninguna categoría existente. | Verificar ortografía o crear la categoría primero en [Administración de categorías](./04-administracion-categorias.mdx). |
+| "Precio base inválido" | El valor de precio no es numérico o está vacío. | Verificar que la columna Precio Base solo contenga números (se aceptan símbolos como `$` y separadores de miles, que el sistema limpia automáticamente). |
+| Error "API: `{motivo}`" en el paso de previsualización tras importar | El producto fue rechazado por el servidor (por ejemplo, SKU duplicado). | Corregir el dato señalado en el archivo original y reintentar solo esas filas. |
+
+:::tip Buena práctica
+Para catálogos grandes, es recomendable dividir la importación en lotes de unos cientos de productos y revisar la previsualización de cada lote antes de confirmar, en lugar de subir un archivo único muy extenso.
+:::

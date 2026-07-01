@@ -1,0 +1,80 @@
+---
+sidebar_position: 11
+title: Gestión y seguimiento de pedidos
+description: Cómo consultar, editar y dar seguimiento a los pedidos desde el panel de administración.
+---
+
+# Gestión y seguimiento de pedidos
+
+**Ruta:** `/admin/pedidos`
+
+Este módulo es el centro de operación diaria del administrador: permite ver todos los pedidos del sistema, filtrarlos, y entrar al detalle de cada uno para darles seguimiento.
+
+## Listado de pedidos
+
+Al ingresar se muestra:
+
+- Título **"Trabajar Pedidos"** con el total de pedidos.
+- Filtro por **Estado** (desplegable con "Todos los estados" y cada estado individual).
+- Botones **"CSV"** y **"Excel"** para exportar el listado filtrado (ver [Descarga de órdenes y reportes](./13-descarga-ordenes-reportes.mdx)).
+- Una tabla con: número de pedido, cliente, asesor asignado, fecha, monto total, estado (en un badge de color) y el botón **"Gestionar"**.
+
+> 🖼️ **CAPTURA:** Vista general de "Trabajar Pedidos" con la tabla y los filtros por estado.
+
+Para ver el detalle completo de un pedido, hacer clic en **"Gestionar"** en la fila correspondiente. Esto navega a `/admin/pedidos/{id}`.
+
+## Detalle de un pedido
+
+La pantalla de detalle reúne toda la información y acciones disponibles sobre un pedido puntual.
+
+### Información general
+
+Muestra el ID del pedido, cliente, empresa, sede, fecha de creación, asesor y repartidor asignados, estado actual, total, notas del cliente, transportista, dirección de entrega y teléfono de contacto (según lo que aplique al pedido).
+
+> 🖼️ **CAPTURA:** Sección de información general en el detalle de un pedido.
+
+### Cambio de estado
+
+Muestra el estado actual del pedido y, si el usuario tiene permiso para avanzarlo, un desplegable con los siguientes estados posibles según su rol (ver [Estados del flujo de pedidos](./12-estados-flujo-pedidos.mdx)). Se puede diligenciar un **motivo del cambio** (opcional) antes de hacer clic en **"Guardar estado"**.
+
+> 🖼️ **CAPTURA:** Bloque de cambio de estado con el desplegable de estados disponibles.
+
+### Ítems del pedido
+
+Tabla con el SKU, producto, cantidad, unidad, precio unitario y total de cada línea del pedido.
+
+Cuando el pedido está en el estado **"Validar disponibilidad"**, un administrador o asesor puede **editar los ítems**: quitar productos que no tengan disponibilidad o ajustar cantidades, indicando un **motivo del cambio de ítems**. Este ajuste queda registrado en el historial del pedido para trazabilidad.
+
+> 🖼️ **CAPTURA:** Tabla de ítems del pedido en modo edición, con el campo de motivo del cambio.
+
+### Comentarios internos
+
+Espacio para dejar notas visibles solo para el equipo interno (administradores y asesores), útil para documentar acuerdos, incidencias o aclaraciones sobre el pedido. Cada comentario queda asociado al usuario que lo escribió, su rol y la fecha. Los comentarios no se pueden eliminar, ya que forman parte del historial de auditoría del pedido.
+
+> 🖼️ **CAPTURA:** Sección de comentarios internos con el campo para agregar uno nuevo.
+
+Para agregar un comentario:
+
+1. Escribir el texto en el campo **"Agregar comentario"**.
+2. Hacer clic en **"Enviar"**.
+
+### Adjuntos
+
+Permite subir y descargar archivos relacionados con el pedido: facturas, recibos, evidencias de entrega, órdenes de compra u otros documentos generales.
+
+1. Arrastrar el archivo al área indicada, o hacer clic para seleccionarlo.
+2. Seleccionar el **Tipo de archivo**: General, Evidencia, Factura, Recibo u Orden de compra.
+3. Hacer clic en **"Subir archivo"**.
+
+Cada archivo subido queda listado con su tipo, nombre, tamaño, quién lo subió y la fecha, con un botón de descarga.
+
+> 🖼️ **CAPTURA:** Sección de adjuntos con la tabla de archivos y el área de carga.
+
+## Buscar un pedido puntual
+
+- Usar el filtro de **Estado** para acotar la vista a un momento específico del flujo (por ejemplo, revisar solo los pedidos en "Validar disponibilidad").
+- Para localizar un pedido de un cliente específico, es más ágil filtrar primero por estado y luego recorrer visualmente la columna **Cliente**, ya que el listado no cuenta con un buscador de texto libre independiente del filtro de estado.
+
+:::tip Rutina recomendada
+Revisar diariamente los pedidos en estado **"Pendiente"** y **"Validar disponibilidad"**, ya que son los que requieren acción activa del equipo interno para no generar demoras en la entrega al cliente.
+:::

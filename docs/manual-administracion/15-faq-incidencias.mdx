@@ -1,0 +1,71 @@
+---
+sidebar_position: 15
+title: Preguntas frecuentes e incidencias comunes
+description: Solución a los problemas más comunes al administrar la plataforma.
+---
+
+# Preguntas frecuentes y solución de incidencias comunes
+
+## Acceso
+
+**No puedo iniciar sesión, dice "Credenciales incorrectas".**
+Verificar que el correo y la contraseña no tengan espacios adicionales ni errores de tipeo. Si el problema persiste, solicitar a otro administrador que verifique el usuario en [Usuarios y roles](./09-usuarios-y-roles.mdx) o que restablezca la contraseña.
+
+**El sistema me saca de la sesión sin razón aparente.**
+La sesión tiene una vigencia de **8 horas**. Pasado ese tiempo, el sistema redirige automáticamente al login. Es un comportamiento esperado; basta con volver a iniciar sesión. Ver [Acceso y autenticación](./02-acceso-autenticacion.mdx).
+
+## Categorías y productos
+
+**No puedo eliminar una categoría.**
+El sistema no permite eliminar categorías que tienen productos asociados. Es necesario reasignar esos productos a otra categoría antes de eliminarla. Ver [Administración de categorías](./04-administracion-categorias.mdx).
+
+**Subí un producto con el SKU equivocado.**
+Editar el producto desde `/admin/catalogo` (ícono de lápiz) y corregir el campo SKU manualmente. No es necesario eliminarlo y volver a crearlo.
+
+**Un producto no aparece en el catálogo del cliente aunque lo creé.**
+Verificar que el checkbox **"Producto activo"** esté marcado y que **"Este producto no hace parte del catálogo"** no esté seleccionado. También revisar que la categoría del producto esté activa.
+
+## Importación masiva
+
+**El sistema dice "Categoría '`{nombre}`' no encontrada" al importar.**
+El nombre de la categoría en el archivo Excel/CSV no coincide con ninguna categoría existente. Verificar la ortografía exacta o crear primero la categoría en [Administración de categorías](./04-administracion-categorias.mdx) antes de reintentar la importación de esas filas.
+
+**Importé un archivo pero algunos productos no se cargaron.**
+Revisar la previsualización del paso 2: las filas marcadas con error (⚠) no se importan. El motivo del error se muestra junto a cada fila. Corregir el archivo original en esas filas específicas y volver a importarlas. Ver [Importación masiva de productos](./06-importacion-masiva-productos.mdx).
+
+## Listas de precios
+
+**Asigné una empresa a una lista de precios, pero seguía facturando con la anterior.**
+Una empresa solo puede tener una lista de precios activa a la vez; la asignación más reciente reemplaza a la anterior. Verificar en `/admin/listas-precios`, dentro de "Empresas" de la lista correspondiente, que la empresa efectivamente quedó marcada en la lista deseada.
+
+**Un producto no tiene el precio especial que definí en la lista.**
+Verificar que el precio se haya guardado correctamente en el modal "Precios" de esa lista (campo no vacío) y que la empresa/sede del cliente esté efectivamente asignada a esa lista y no a otra distinta a nivel de sede (los overrides de sede tienen prioridad).
+
+## Empresas, sedes y usuarios
+
+**Un pedido aparece "sin asesor asignado".**
+Ocurre cuando ni la sede ni la empresa del cliente tienen un asesor configurado. Asignar el asesor en [Empresas y sedes](./08-empresas-y-sedes.mdx) o directamente en el detalle del pedido afectado (ver [Asignación de asesores comerciales](./10-asignacion-asesores.mdx)). Los pedidos futuros de esa empresa/sede quedarán asociados automáticamente una vez configurado.
+
+**Un cliente no puede aprobar pedidos aunque debería poder.**
+Verificar que su rol esté configurado como **Supervisor** (no "Creador de pedidos") en [Usuarios y roles](./09-usuarios-y-roles.mdx), y que pertenezca a la misma sede que los usuarios cuyos pedidos debe aprobar.
+
+**No puedo cambiar el rol de un asesor a repartidor (o viceversa).**
+El campo Rol de personal interno no se puede modificar después de creado el usuario. Es necesario crear un nuevo usuario con el rol correcto y desactivar el anterior.
+
+## Pedidos
+
+**Un pedido quedó "Rechazado" pero el cliente corrigió lo que se pidió.**
+Solo un **Administrador** puede regresar un pedido de "Rechazado" a "Pendiente". Ir al detalle del pedido y usar el bloque de cambio de estado. Ver [Estados del flujo de pedidos](./12-estados-flujo-pedidos.mdx).
+
+**Necesito quitar un producto de un pedido porque no hay stock.**
+Esto solo es posible mientras el pedido está en el estado **"Validar disponibilidad"**. Abrir el detalle del pedido, editar la tabla de ítems, remover el producto e indicar el motivo del ajuste.
+
+**No encuentro un pedido específico en el listado.**
+El listado de `/admin/pedidos` no tiene buscador de texto libre; usar el filtro de **Estado** para acotar la vista y ubicar el pedido revisando la columna Cliente y la fecha.
+
+**No puedo descargar el reporte de pedidos.**
+Verificar que el navegador no esté bloqueando la descarga de archivos (revisar la barra de notificaciones del navegador) y que exista al menos un pedido que cumpla el filtro de estado aplicado.
+
+## ¿A quién contactar si el problema persiste?
+
+Si después de seguir las indicaciones de esta sección el problema continúa, o si se trata de un comportamiento inesperado no descrito aquí, contactar al equipo técnico responsable del mantenimiento de la plataforma, indicando: el usuario y rol con el que se presentó el problema, la pantalla exacta, y —de ser posible— una captura de pantalla del error.

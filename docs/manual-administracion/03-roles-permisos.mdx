@@ -1,0 +1,85 @@
+---
+sidebar_position: 3
+title: Roles y permisos
+description: Descripción de los roles del sistema y qué puede hacer cada uno.
+---
+
+# Descripción de los roles y permisos administrativos
+
+La plataforma organiza el acceso mediante **cuatro roles principales**. El rol **Cliente** tiene además dos variantes internas (sub-roles) que determinan si un usuario puede o no aprobar pedidos.
+
+## Cuadro general de roles
+
+| Rol | Panel | Descripción |
+|---|---|---|
+| **Administrador** (`admin`) | `/admin` | Control total de la plataforma: catálogo, precios, empresas, usuarios y pedidos. |
+| **Asesor comercial** (`advisor`) | `/asesor` | Gestiona los pedidos de las empresas que tiene asignadas. |
+| **Cliente** (`client`) | `/cliente` | Usuario de una empresa cliente. Crea pedidos; si es supervisor, también los aprueba. |
+| **Repartidor** (`delivery`) | `/entregas` | Gestiona el alistamiento, despacho y entrega física de los pedidos. |
+
+## Administrador
+
+Es el rol con mayor nivel de acceso. Un administrador puede:
+
+- Crear, editar, desactivar y eliminar **categorías** y **productos** del catálogo.
+- Realizar **importaciones masivas** de productos desde Excel/CSV.
+- Crear **listas de precios** y asignarlas a empresas.
+- Crear y editar **empresas** y sus **sedes**.
+- Crear **usuarios** (clientes, asesores, repartidores) y asignarles rol.
+- Asignar **asesores comerciales** a empresas y sedes.
+- Ver y gestionar **todos los pedidos** del sistema, en cualquier estado.
+- Cambiar el estado de un pedido en cualquiera de las transiciones válidas (ver [Estados del flujo de pedidos](./12-estados-flujo-pedidos.mdx)), incluyendo aprobar/rechazar y revertir un rechazo.
+- Descargar **reportes** (CSV/Excel) y **órdenes de compra en PDF**.
+- Consultar el **dashboard** con indicadores globales de la operación.
+
+## Asesor comercial
+
+Acompaña comercialmente a un conjunto de empresas que tiene asignadas (ver [Asignación de asesores comerciales](./10-asignacion-asesores.mdx)):
+
+- Ve únicamente los pedidos de las **empresas asignadas** a él.
+- No ve pedidos en estado **Pendiente por aprobar** ni **Rechazado** (esos pasos son responsabilidad del supervisor de la empresa o del administrador).
+- Puede avanzar un pedido de **Pendiente** a **Validar disponibilidad**, y de **Validar disponibilidad** a **Alistamiento**.
+- Puede agregar comentarios internos y descargar PDF/reportes de sus pedidos.
+- No puede modificar catálogo, precios, empresas ni usuarios.
+
+## Cliente
+
+Usuario que pertenece a una empresa (y opcionalmente a una sede específica). Tiene dos variantes:
+
+### Creador de pedidos
+
+- Puede navegar el catálogo y crear pedidos.
+- Si en su misma sede existe un usuario **Supervisor**, su pedido queda en estado **Pendiente por aprobar** hasta que el supervisor lo revise.
+- Si no hay supervisor en su sede, el pedido pasa directamente a **Pendiente**.
+- Solo ve sus propios pedidos.
+
+### Supervisor
+
+- Tiene los mismos permisos que un creador de pedidos (puede crear pedidos).
+- Adicionalmente, puede **aprobar o rechazar** los pedidos en estado "Pendiente por aprobar" creados por los usuarios de su misma sede.
+- Ve el histórico de pedidos de su sede, no solo los propios.
+
+Existe también una variante de **solo lectura**, el **Administrador de empresa** (`admin_empresa`), utilizada quirúrgicamente en algunas cuentas: permite consultar el catálogo y los reportes/estadísticas de pedidos de **todas las sedes** de la empresa, sin capacidad de crear ni aprobar pedidos.
+
+## Repartidor
+
+Rol operativo de logística:
+
+- Ve únicamente los pedidos que tiene **asignados personalmente**, y solo en los estados **Alistamiento**, **En Ruta** y **Entregado**.
+- Puede avanzar un pedido de **Alistamiento** a **En Ruta**, y de **En Ruta** a **Entregado**.
+- No tiene acceso a catálogo, precios, empresas ni usuarios.
+
+## Resumen de transiciones de estado por rol
+
+| Rol | Transiciones que puede ejecutar |
+|---|---|
+| Administrador | Pendiente por aprobar → Validar disponibilidad / Rechazado · Rechazado → Pendiente · Pendiente → Validar disponibilidad · Validar disponibilidad → Alistamiento · Alistamiento → En Ruta · En Ruta → Entregado |
+| Asesor comercial | Pendiente → Validar disponibilidad · Validar disponibilidad → Alistamiento |
+| Supervisor (cliente) | Pendiente por aprobar → Validar disponibilidad / Rechazado |
+| Repartidor | Alistamiento → En Ruta · En Ruta → Entregado |
+
+El detalle completo del flujo de pedidos se explica en [Estados del flujo de pedidos](./12-estados-flujo-pedidos.mdx).
+
+:::tip Recomendación
+Al crear un nuevo usuario, asignar siempre el rol mínimo necesario para su función. Por ejemplo, no asignar el rol de Supervisor a un usuario que solo debe crear pedidos, ya que eso le daría capacidad de aprobar/rechazar pedidos de otros usuarios de su sede.
+:::

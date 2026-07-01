@@ -1,0 +1,57 @@
+---
+sidebar_position: 10
+title: Asignación de asesores comerciales
+description: Cómo vincular un asesor comercial a una empresa o a una sede específica.
+---
+
+# Asignación de asesores comerciales
+
+Cada empresa cliente puede tener un **asesor comercial** asignado, responsable de gestionar comercialmente sus pedidos. El asesor asignado es quien ve esos pedidos en su panel (`/asesor`) y puede avanzarlos en el flujo (ver [Estados del flujo de pedidos](./12-estados-flujo-pedidos.mdx)).
+
+La asignación se puede realizar en dos niveles: **empresa** y **sede**.
+
+## Asignación a nivel de empresa
+
+Es la asignación por defecto: se aplica a todos los pedidos de la empresa, salvo que una sede específica tenga su propio asesor asignado (ver más abajo).
+
+1. Ir a `/admin/empresas`.
+2. Editar la empresa (ícono de lápiz) o crearla si aún no existe (ver [Empresas y sedes](./08-empresas-y-sedes.mdx)).
+3. En el campo **"Asesor asignado"**, seleccionar el asesor correspondiente de la lista (solo aparecen asesores activos).
+4. Guardar los cambios.
+
+> 🖼️ **CAPTURA:** Campo "Asesor asignado" en el formulario de edición de empresa.
+
+A partir de este momento, los pedidos generados por la empresa se asocian automáticamente a este asesor.
+
+## Asignación a nivel de sede (override)
+
+Cuando una sede específica de la empresa debe ser atendida por un asesor distinto al de la empresa (por ejemplo, una sucursal en otra ciudad), se configura de forma independiente:
+
+1. Ir a `/admin/empresas` y expandir la empresa correspondiente.
+2. Editar la sede (ícono de lápiz junto a la sucursal) o crearla si aún no existe.
+3. En la sección **"Overrides por sucursal (opcional)"**, seleccionar el asesor deseado en el campo **"Asesor"**. Dejarlo en **"— Hereda de empresa —"** para que la sede use el asesor general de la empresa.
+4. Guardar los cambios.
+
+> 🖼️ **CAPTURA:** Sección "Overrides por sucursal" en el formulario de edición de sede, mostrando el campo Asesor.
+
+## Cómo se resuelve el asesor de un pedido
+
+Al crearse un pedido, el sistema determina el asesor responsable siguiendo este orden de prioridad:
+
+1. Asesor asignado directamente a la **sede** del usuario que hizo el pedido (si existe).
+2. Si la sede no tiene asesor propio, se usa el asesor asignado a la **empresa**.
+3. Si ninguno de los dos tiene asesor asignado, el pedido queda **sin asesor** ("— Sin asignar —"), visible únicamente para los administradores hasta que se le asigne uno manualmente desde el detalle del pedido.
+
+## Reasignar el asesor de un pedido puntual
+
+Un administrador puede cambiar el asesor de un pedido específico (por ejemplo, ante una reasignación de cartera) directamente desde el detalle del pedido:
+
+1. Ir a `/admin/pedidos` y abrir el pedido correspondiente (botón **"Gestionar"**).
+2. En la sección de información general, ubicar el campo **Asesor**.
+3. Seleccionar el nuevo asesor.
+
+> 🖼️ **CAPTURA:** Campo "Asesor" editable en el detalle de un pedido.
+
+:::tip Buena práctica
+Ante cambios de cartera comercial (por ejemplo, un asesor que deja la empresa), actualizar la asignación a nivel de **empresa** o **sede** en lugar de reasignar pedido por pedido, para que todos los pedidos futuros de esa empresa queden correctamente asociados al nuevo asesor de forma automática.
+:::
