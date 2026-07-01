@@ -15,9 +15,15 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://oblicuaDev.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
-  baseUrl: '/',
+  baseUrl: '/papeleriacartagena-docs/',
+
+  // GitHub Pages deployment config.
+  organizationName: 'oblicuaDev',
+  projectName: 'papeleriacartagena-docs',
+  deploymentBranch: 'gh-pages',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
 
