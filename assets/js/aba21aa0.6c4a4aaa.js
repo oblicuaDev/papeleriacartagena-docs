@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpapeleriacartagena_docs=self.webpackChunkpapeleriacartagena_docs||[]).push([["747"],{7093(a){a.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"default"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpapeleriacartagena_docs=self.webpackChunkpapeleriacartagena_docs||[]).push([["668"],{6569(e,a,r){r.r(a),r.d(a,{default:()=>l});var s=r(4848);r(6540);var c=r(4164),n=r(4308),p=r(8287),t=r(2831),u=r(1085);function l(e){return(0,s.jsx)(n.e3,{className:(0,c.A)(p.G.wrapper.docsPages),children:(0,s.jsx)(u.A,{children:(0,t.v)(e.route.routes)})})}}}]);
