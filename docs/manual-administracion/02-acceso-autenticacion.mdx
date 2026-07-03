@@ -4,52 +4,42 @@ title: Acceso y autenticación
 description: Cómo iniciar sesión en el panel de administración y qué hacer ante problemas de acceso.
 ---
 
-# Acceso a la plataforma y proceso de autenticación
+# Acceso a la plataforma y autenticación
 
-## Dirección de acceso
+## Ingresar
 
-El panel de administración se accede a través del navegador web, ingresando a la URL de la plataforma seguida de `/login`. No requiere instalación de ningún programa; funciona desde cualquier computador con navegador actualizado (Chrome, Edge o Firefox recomendados).
+1. Abrir la URL de la plataforma seguida de `/login` (Chrome, Edge o Firefox).
+2. Escribir **Correo Electrónico** y **Contraseña**.
+3. Clic en **Ingresar**.
+4. El sistema redirige al panel según el rol. Administrador → `/admin`.
 
-## Obtener credenciales
+![Captura de pantalla](pathname:///papeleriacartagena-docs/img/login_1.png)
+_Pantalla de login._
 
-Las credenciales de acceso (correo electrónico y contraseña) son creadas por otro administrador desde el módulo de [Usuarios y roles](./09-usuarios-y-roles.mdx), o entregadas por el equipo responsable de la puesta en marcha del sistema. No existen credenciales genéricas: cada administrador debe tener su propio usuario para mantener la trazabilidad de las acciones (comentarios en pedidos, cambios de estado, etc.).
+<video src="pathname:///papeleriacartagena-docs/video/login_1.mp4" autoPlay loop muted playsInline controls width="100%" />
+_Proceso completo de inicio de sesión._
 
-## Iniciar sesión
+Las credenciales las crea otro administrador desde [Usuarios y roles](./09-usuarios-y-roles.mdx). Cada persona debe tener su propio usuario para mantener la trazabilidad de sus acciones.
 
-1. Abrir la URL de la plataforma en el navegador. El sistema redirige automáticamente a la pantalla de **Login** si no hay una sesión activa.
-2. Diligenciar el campo **Correo Electrónico** con el correo registrado.
-3. Diligenciar el campo **Contraseña**. Se puede usar el ícono de ojo para mostrar/ocultar el texto ingresado y verificar que no haya errores de tipeo.
-4. Hacer clic en el botón **Ingresar**.
-5. Si las credenciales son correctas, el sistema redirige automáticamente al panel correspondiente al rol del usuario. Para un usuario **Administrador**, la redirección es a `/admin` (Dashboard).
+### Errores comunes
 
-> 🖼️ **CAPTURA:** Pantalla de login con los campos "Correo Electrónico" y "Contraseña" y el botón "Ingresar".
+| Mensaje                            | Causa                             | Solución                                                                 |
+| ---------------------------------- | --------------------------------- | ------------------------------------------------------------------------ |
+| "Credenciales incorrectas"         | Correo o contraseña no coinciden. | Revisar tipeo; si persiste, pedir restablecimiento a otro administrador. |
+| Pantalla en blanco / sin respuesta | Problema de red o servidor caído. | Revisar conexión y reintentar; si continúa, contactar soporte técnico.   |
 
-### Mensajes de error comunes
+## Sesión y cierre
 
-| Mensaje | Causa | Solución |
-|---|---|---|
-| "Credenciales incorrectas. Verifica tu email y contraseña." | El correo no existe o la contraseña no coincide. | Verificar que no haya espacios ni errores de tipeo. Si persiste, solicitar el restablecimiento del usuario a otro administrador. |
-| Error de conexión / pantalla en blanco prolongada | Problema de red o el servidor no responde. | Verificar la conexión a internet y reintentar. Si continúa, contactar al equipo técnico. |
+- La sesión dura **8 horas**; luego pide iniciar sesión de nuevo (es normal, no se pierde información guardada).
+- Al recargar la página dentro de ese tiempo, la sesión se mantiene activa.
+- Para salir, usar el botón **Cerrar sesión** del panel.
 
-## Duración de la sesión
+![Captura de pantalla](pathname:///papeleriacartagena-docs/img/login_2.png)
+_Ubicación del botón "Cerrar sesión"._
 
-Por seguridad, la sesión iniciada tiene una **vigencia de 8 horas**. Pasado ese tiempo, cualquier acción dentro del panel redirige automáticamente a la pantalla de login para que el usuario vuelva a autenticarse. Esto es normal y no implica pérdida de información ya guardada.
+## Buenas prácticas
 
-Al recargar la página dentro de las 8 horas de vigencia, la sesión se mantiene activa automáticamente: no es necesario volver a iniciar sesión cada vez que se abre o refresca el navegador.
-
-## Cerrar sesión
-
-Se recomienda cerrar sesión al terminar de usar el panel, especialmente en equipos compartidos:
-
-1. Ubicar el botón de **Cerrar sesión** en el panel lateral o superior del panel de administración (según el diseño vigente).
-2. Hacer clic sobre él.
-3. El sistema elimina la sesión activa y redirige a la pantalla de login.
-
-> 🖼️ **CAPTURA:** Ubicación del botón "Cerrar sesión" en el panel de administración.
-
-## Buenas prácticas de acceso
-
-- No compartir el usuario y contraseña entre varias personas: cada administrador debe tener su propia cuenta.
-- Usar contraseñas robustas (mínimo 8 caracteres, combinando letras, números y símbolos).
-- Cerrar sesión al usar equipos compartidos o públicos.
-- Reportar de inmediato cualquier acceso o cambio no reconocido en el sistema.
+- Un usuario por persona; no compartir credenciales.
+- Contraseñas robustas (mínimo 8 caracteres, con letras, números y símbolos).
+- Cerrar sesión en equipos compartidos o públicos.
+- Reportar de inmediato accesos o cambios no reconocidos.

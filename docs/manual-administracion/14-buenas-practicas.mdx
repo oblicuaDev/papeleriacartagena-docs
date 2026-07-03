@@ -4,46 +4,42 @@ title: Buenas prácticas
 description: Recomendaciones generales para administrar la plataforma de forma ordenada y segura.
 ---
 
-# Buenas prácticas para la administración del sistema
+# Buenas prácticas
 
-## Gestión del catálogo
+## Catálogo
 
-- **Usar SKU consistentes**: definir una convención de códigos (por familia de producto, por proveedor, etc.) antes de cargar el catálogo, y mantenerla en el tiempo. Cambiar el esquema de SKU después de tener pedidos históricos genera confusión en los reportes.
-- **Preferir desactivar sobre eliminar** productos y categorías que ya han sido parte de pedidos, para no perder trazabilidad en reportes históricos.
-- **Revisar la previsualización** cuidadosamente antes de confirmar cualquier importación masiva (ver [Importación masiva de productos](./06-importacion-masiva-productos.mdx)).
-- Mantener las **categorías relacionadas** (cross-selling) actualizadas y coherentes con la lógica real de compra de los clientes.
+- Define una convención de **SKU** antes de cargar el catálogo y mantenla en el tiempo.
+- Prefiere **desactivar** sobre eliminar productos y categorías con pedidos históricos.
+- Revisa la previsualización antes de confirmar una importación (ver [Importación masiva](./06-importacion-masiva-productos.mdx)).
+- Mantén las categorías relacionadas coherentes con la lógica real de compra.
 
-## Gestión de precios
+## Precios
 
-- Documentar en el campo **Descripción** de cada lista de precios el acuerdo comercial que representa (cliente, vigencia, condiciones), ya que ese campo es la única referencia interna disponible dentro del sistema.
-- Antes de reasignar una empresa a una nueva lista de precios, verificar el impacto revisando cuántos productos tienen precio definido en esa lista y si cubre el catálogo relevante para esa empresa.
-- Revisar periódicamente que las listas de precios no queden obsoletas (por ejemplo, acuerdos comerciales vencidos que sigan activos en el sistema).
+- Documenta el acuerdo comercial en la **Descripción** de cada lista de precios.
+- Revisa el impacto (productos cubiertos) antes de reasignar una empresa a otra lista.
+- Revisa periódicamente listas vencidas que sigan activas.
 
-## Gestión de empresas, sedes y usuarios
+## Empresas, sedes y usuarios
 
-- Verificar que cada empresa tenga **asesor asignado** y, si aplica, **lista de precios**, antes de habilitar sus usuarios para evitar pedidos "sin asesor" o facturados al precio base por error.
-- Asignar el rol **Supervisor** únicamente a las personas de la empresa cliente con autoridad real para aprobar compras.
-- Usar los **overrides de sede** solo cuando existan diferencias reales respecto a la empresa; de lo contrario, configurar una sola vez a nivel de empresa simplifica el mantenimiento.
-- Cada administrador, asesor y repartidor debe tener su **propio usuario**; no compartir credenciales, para mantener la trazabilidad de comentarios y cambios de estado.
+- Verifica que cada empresa tenga asesor y lista de precios antes de habilitar sus usuarios.
+- Asigna el rol **Supervisor** solo a quien tenga autoridad real de compra.
+- Usa overrides de sede solo si hay diferencias reales frente a la empresa.
+- Un usuario por persona; nunca compartir credenciales.
 
-## Gestión de pedidos
+## Pedidos
 
-- Revisar diariamente los pedidos en **Pendiente** y **Validar disponibilidad**, que son los que requieren acción activa del equipo interno.
-- Registrar siempre un **motivo** al rechazar un pedido o al ajustar ítems en "Validar disponibilidad", para que el historial sea comprensible para cualquier persona que lo consulte después.
-- Usar los **comentarios internos** del pedido para documentar acuerdos o incidencias, en lugar de canales externos (chat, correo) que no queden asociados al pedido.
-- Adjuntar los soportes relevantes (evidencia de entrega, factura, orden de compra del cliente) directamente en el pedido correspondiente.
+- Revisa a diario los pedidos en **Pendiente** y **Validar disponibilidad**.
+- Registra siempre el **motivo** al rechazar un pedido o ajustar ítems.
+- Usa los comentarios internos en vez de canales externos (chat, correo).
+- Adjunta los soportes relevantes directamente en el pedido.
 
 ## Seguridad
 
-- Cerrar sesión en equipos compartidos.
-- Usar contraseñas robustas y no reutilizar la misma contraseña en distintos sistemas.
-- Desactivar (no solo "ignorar") los usuarios de personal que deja de trabajar con Papelería Cartagena, tan pronto como sea posible.
-- Reportar cualquier comportamiento inesperado del sistema (cambios no reconocidos, accesos extraños) al equipo técnico de inmediato.
+- Cierra sesión en equipos compartidos.
+- Usa contraseñas robustas y no las reutilices entre sistemas.
+- Desactiva de inmediato a quien deje de trabajar con la empresa.
+- Reporta cualquier comportamiento inesperado al equipo técnico.
 
-## Mantenimiento de este manual
+## Mantener este manual
 
-Este manual debe actualizarse cada vez que:
-
-- Se agregue o modifique una funcionalidad relevante del panel de administración.
-- Cambien los estados del flujo de pedidos o las reglas de transición entre roles.
-- Se rediseñe visualmente el panel (para mantener las capturas de pantalla vigentes).
+Actualízalo cuando: cambie una funcionalidad relevante, cambien los estados o reglas del flujo de pedidos, o se rediseñe el panel (para renovar capturas y videos).

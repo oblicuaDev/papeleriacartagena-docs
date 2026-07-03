@@ -10,74 +10,57 @@ description: Cómo crear, editar, buscar y desactivar productos del catálogo.
 
 ## Pantalla principal
 
-Al ingresar se muestra:
+- Título con el total de productos registrados.
+- Botones **"Importar Excel"** (ver [Importación masiva](./06-importacion-masiva-productos.mdx)) y **"+ Nuevo Producto"**.
+- Filtros: búsqueda por nombre/SKU, categoría y estado.
+- Tabla de productos.
 
-- El título **"Catálogo de Productos"** con el total de productos registrados.
-- Los botones **"Importar Excel"** (ver [Importación masiva de productos](./06-importacion-masiva-productos.mdx)) y **"+ Nuevo Producto"**.
-- Una fila de filtros:
-  - **Búsqueda** por nombre o SKU.
-  - **Categoría** (desplegable, con opción "Todas las categorías").
-  - **Estado**: "Todos (activos e inactivos)", "Solo activos" o "Solo inactivos".
-- Una tabla con los productos existentes.
-
-> 🖼️ **CAPTURA:** Vista general del catálogo con filtros de búsqueda, categoría y estado.
+![Vista general del catálogo con filtros.](pathname:///papeleriacartagena-docs/img/catalogo_1.png)
+*Vista general del catálogo con filtros.*
 
 ### Columnas de la tabla
 
 | Columna | Contenido |
 |---|---|
 | Imagen | Miniatura del producto (imagen por defecto si no tiene). |
-| SKU | Código único del producto. |
+| SKU | Código único. |
 | Nombre | Nombre y descripción resumida. |
 | Categoría | Categoría asignada. |
-| Precio Base | Precio en pesos colombianos (COP). |
+| Precio Base | En pesos colombianos (COP). |
 | Stock | Unidades disponibles. |
-| Unidad | Unidad de medida (Unidad, Resma, Caja, etc.). |
+| Unidad | Unidad, Resma, Caja, Paquete, Pliego, Set o Rollo. |
 | Estado | Activo / Inactivo. |
 | Acciones | Editar, Activar/Desactivar, Eliminar. |
 
-Si el catálogo tiene más de 50 productos, la tabla se pagina, mostrando controles "← Anterior" / "Siguiente →" y el rango visible (por ejemplo, "Mostrando 1–50 de 250").
+Con más de 50 productos, la tabla se pagina (ej. "Mostrando 1–50 de 250").
 
 ## Crear un producto
 
-1. Hacer clic en **"+ Nuevo Producto"**.
-2. **Imagen** (opcional): hacer clic sobre el recuadro de vista previa para seleccionar un archivo de imagen desde el equipo.
-3. Diligenciar **Nombre*** y **SKU*** (código único de referencia del producto).
-4. Seleccionar la **Categoría*** desde el desplegable (solo aparecen categorías activas).
-5. Diligenciar la **Descripción** (opcional).
-6. Diligenciar **Precio Base (COP)*** (mayor a cero), **Stock** (por defecto 0) y **Unidad** (Unidad, Resma, Caja, Paquete, Pliego, Set o Rollo).
-7. Opcional: en **"Productos complementarios (cross-selling)"**, buscar por nombre o SKU y seleccionar los productos que se quieren sugerir junto a este.
-8. Verificar el checkbox **"Producto activo"** (marcado por defecto). Si el producto no debe ser visible en el catálogo público (por ejemplo, un producto especial o de uso interno), marcar **"Este producto no hace parte del catálogo"**.
-9. Hacer clic en **"Crear Producto"**.
+1. Clic en **"+ Nuevo Producto"**.
+2. Imagen (opcional).
+3. **Nombre*** y **SKU***.
+4. **Categoría*** (solo aparecen las activas).
+5. Descripción (opcional).
+6. **Precio Base (COP)***, Stock (por defecto 0) y Unidad.
+7. Opcional: productos complementarios (cross-selling).
+8. Checkbox **"Producto activo"**; marcar **"No hace parte del catálogo"** si es de uso interno.
+9. Clic en **"Crear Producto"**.
 
-> 🖼️ **CAPTURA:** Modal de creación de producto con todas sus secciones (imagen, datos básicos, categoría, precios/stock y productos complementarios).
+![GIF animado](https://placehold.co/600x400?text=GIF)
+*Crear un producto completo, incluyendo cross-selling.*
 
-Si ocurre un error al guardar (por ejemplo, un SKU duplicado), aparece un mensaje en un recuadro rojo en la parte superior del formulario.
+Si ocurre un error al guardar (por ejemplo, SKU duplicado), aparece en un recuadro rojo arriba del formulario.
 
-## Editar un producto
+## Editar, activar/desactivar o eliminar
 
-1. En la tabla, hacer clic en el ícono de **Editar** (lápiz) de la fila correspondiente.
-2. Modificar los campos necesarios.
-3. Hacer clic en **"Guardar Cambios"**.
-
-## Activar/desactivar un producto
-
-Desactivar un producto lo retira del catálogo visible para los clientes sin eliminar su historial (pedidos anteriores que lo incluyen no se ven afectados).
-
-1. En la tabla, hacer clic en el ícono correspondiente en la columna **Acciones**.
-2. El estado cambia inmediatamente.
-
-## Eliminar un producto
-
-1. En la tabla, hacer clic en el ícono de **papelera**.
-2. Confirmar la eliminación.
+- **Editar**: ícono de lápiz → modificar → **Guardar Cambios**.
+- **Activar/Desactivar**: retira el producto del catálogo visible sin perder su historial de pedidos.
+- **Eliminar**: ícono de papelera → confirmar.
 
 :::warning Recomendación
-Se recomienda **desactivar** en lugar de **eliminar** productos que ya han sido parte de pedidos históricos, para conservar la trazabilidad de reportes y órdenes de compra anteriores.
+Prefiere **desactivar** sobre eliminar productos con pedidos históricos, para conservar la trazabilidad de reportes.
 :::
 
-## Buscar y filtrar productos
+## Buscar y filtrar
 
-- Usar el campo de búsqueda para localizar un producto por **nombre** o **SKU**.
-- Combinar con el filtro de **Categoría** para acotar resultados dentro de una familia de productos.
-- Usar el filtro de **Estado** para revisar únicamente productos activos (los que ven los clientes) o inactivos (los retirados temporalmente).
+Combina búsqueda (nombre/SKU), categoría y estado para acotar los resultados a los productos activos o inactivos.

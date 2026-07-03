@@ -4,88 +4,66 @@ title: Usuarios y roles
 description: Cómo crear usuarios cliente, asesores y repartidores, y asignar sus roles.
 ---
 
-# Administración de usuarios y asignación de roles
+# Usuarios y roles
 
-La plataforma distingue dos tipos de gestión de usuarios: **clientes** (usuarios de las empresas compradoras) y **personal interno** (asesores comerciales y repartidores).
+Dos tipos de gestión: **clientes** (usuarios de las empresas compradoras) y **personal interno** (asesores y repartidores).
 
 ## Clientes
 
 **Ruta:** `/admin/clientes`
 
-### Pantalla principal
+Tabla con nombre, email, empresa/sede, rol (Supervisor o Creador), contacto, lista de precios efectiva, dirección y fecha de creación.
 
-Se muestra una tabla con todos los usuarios cliente registrados, indicando:
+![Vista general de clientes.](pathname:///papeleriacartagena-docs/img/usuarios_1.png)
+*Vista general de clientes.*
 
-- Nombre y email.
-- Empresa y sede a la que pertenecen.
-- Rol: **Supervisor** o **Creador de pedidos**.
-- Datos de contacto (nombre y teléfono, si se registraron).
-- Lista de precios efectiva (heredada de la sede/empresa) o "— Precio base —" si no tiene una asignada.
-- Dirección y fecha de creación del usuario.
+### Crear un cliente
 
-> 🖼️ **CAPTURA:** Vista general de "Clientes" con la tabla de usuarios.
+1. Clic en **"+ Nuevo Cliente"**.
+2. **Empresa*** y Sucursal (opcional; sin ella hereda la configuración de la empresa).
+3. **Nombre usuario / razón social***.
+4. Nombre contacto (opcional).
+5. **Email*** y **Contraseña*** iniciales.
+6. Teléfono y Dirección (opcionales).
+7. **Rol del usuario***: **Creador de pedidos** (crea, queda pendiente de aprobación) o **Supervisor** (crea y además aprueba/rechaza).
+8. Clic en **"Crear Cliente"**.
 
-### Crear un usuario cliente
+![GIF animado](https://placehold.co/600x400?text=GIF)
+*Crear un cliente y asignar su rol.*
 
-1. Hacer clic en **"+ Nuevo Cliente"**.
-2. Seleccionar la **Empresa*** a la que pertenece el usuario.
-3. Opcionalmente, seleccionar la **Sucursal**. Si no se asigna, el usuario hereda la configuración general de la empresa (asesor y lista de precios).
-4. Diligenciar el **Nombre usuario / razón social*** (por ejemplo, el nombre de la papelería o del punto de venta cliente).
-5. Diligenciar opcionalmente el **Nombre contacto** (persona de contacto en la empresa).
-6. Diligenciar el **Email*** (será el usuario de acceso) y una **Contraseña*** inicial.
-7. Diligenciar opcionalmente **Teléfono** y **Dirección**.
-8. Seleccionar el **Rol del usuario***:
-   - **Creador de pedidos**: crea pedidos que quedan pendientes de aprobación por un supervisor de su misma sede.
-   - **Supervisor**: puede crear pedidos y además aprobar o rechazar los pedidos de los creadores de pedidos de su empresa/sede.
-9. Hacer clic en **"Crear Cliente"**.
-
-> 🖼️ **CAPTURA:** Modal de creación de cliente, mostrando la selección de empresa/sucursal y el rol del usuario.
-
-:::info Sobre la lista de precios del cliente
-No es necesario configurar manualmente la lista de precios de un cliente: se hereda automáticamente de la sede (si tiene una asignada) o de la empresa. Ver [Listas de precios](./07-listas-de-precios.mdx).
+:::info
+La lista de precios se hereda automáticamente (sede o empresa); no se configura aquí. Ver [Listas de precios](./07-listas-de-precios.mdx).
 :::
 
-:::warning Impacto de asignar el rol Supervisor
-Un usuario con rol **Supervisor** puede aprobar y rechazar pedidos de **todos** los creadores de pedidos de su misma sede, no solo los propios. Asignar este rol únicamente a las personas con autoridad real para aprobar compras en la empresa cliente.
+:::warning Rol Supervisor
+Puede aprobar o rechazar pedidos de **todos** los creadores de su misma sede, no solo los propios. Asígnalo con criterio.
 :::
 
 ## Personal interno (asesores y repartidores)
 
 **Ruta:** `/admin/asesores`
 
-### Pantalla principal
+Dos pestañas: **👤 Asesores** y **🚚 Repartidores**, cada una con nombre, email, sede asignada y estado.
 
-La pantalla tiene dos pestañas:
-
-- **👤 Asesores**
-- **🚚 Repartidores**
-
-Cada pestaña muestra una tabla con nombre, email, sede asignada y estado (Activo/Inactivo) del personal correspondiente.
-
-> 🖼️ **CAPTURA:** Vista de "Personal interno" con las pestañas Asesores y Repartidores.
+![Vista de personal interno.](pathname:///papeleriacartagena-docs/img/usuarios_2.png)
+*Vista de personal interno.*
 
 ### Crear un asesor o repartidor
 
-1. Ubicarse en la pestaña correspondiente (Asesores o Repartidores) y hacer clic en **"+ Nuevo Asesor"** o **"+ Nuevo Repartidor"**.
-2. Diligenciar **Nombre completo***, **Email*** y una **Contraseña*** inicial.
-3. Verificar que el campo **Rol** corresponda al tipo de personal que se está creando (Asesor o Repartidor). **Este campo no se puede modificar después de creado el usuario**, por lo que debe verificarse antes de guardar.
-4. Opcional: asignar una **Sede** desde el desplegable.
-5. Opcional: diligenciar **Iniciales (máx. 3)** para el avatar del usuario; si se deja vacío, se generan automáticamente a partir del nombre.
-6. Verificar el checkbox **"Usuario activo"** (marcado por defecto).
-7. Hacer clic en **"Crear Asesor"** / **"Crear Repartidor"**.
+1. En la pestaña correspondiente, clic en **"+ Nuevo Asesor"** o **"+ Nuevo Repartidor"**.
+2. **Nombre completo***, **Email*** y **Contraseña*** iniciales.
+3. Verificar el **Rol** (Asesor o Repartidor): **no se puede cambiar después de creado**.
+4. Sede (opcional).
+5. Iniciales del avatar (opcional; se generan solas si se deja vacío).
+6. Checkbox **"Usuario activo"**.
+7. Clic en **"Crear"**.
 
-> 🖼️ **CAPTURA:** Modal de creación de personal interno, con el desplegable de Rol y el campo de sede asignada.
+### Editar, desactivar o eliminar
 
-### Editar personal interno
-
-1. Hacer clic en el ícono de lápiz de la fila correspondiente.
-2. Modificar los campos necesarios. El campo **Contraseña** se muestra como "Nueva contraseña (vacío = no cambiar)": dejarlo vacío conserva la contraseña actual del usuario.
-3. Hacer clic en **"Guardar cambios"**.
-
-### Desactivar o eliminar personal interno
-
-Desmarcar el checkbox **"Usuario activo"** impide el acceso del usuario sin eliminar su historial de pedidos gestionados. Usar **Eliminar** (ícono de papelera) solo cuando se tenga certeza de que el registro ya no es necesario.
+- **Editar**: ícono de lápiz. Dejar la contraseña vacía conserva la actual.
+- **Desactivar**: quita el acceso sin borrar el historial de pedidos gestionados.
+- **Eliminar**: solo cuando el registro ya no sea necesario.
 
 :::tip Buena práctica
-Preferir la **desactivación** sobre la eliminación para asesores y repartidores que hayan gestionado pedidos, de forma que su nombre siga apareciendo correctamente en el historial y los reportes de pedidos ya procesados.
+Prefiere desactivar sobre eliminar personal que ya gestionó pedidos, para conservar el historial y los reportes.
 :::

@@ -4,66 +4,55 @@ title: Empresas y sedes
 description: Cómo administrar empresas cliente y sus sedes o sucursales.
 ---
 
-# Administración de empresas y sedes
+# Empresas y sedes
 
 **Ruta:** `/admin/empresas`
 
-Una **empresa** representa a un cliente corporativo de Papelería Cartagena. Cada empresa puede tener una o varias **sedes** (sucursales), y cada sede puede tener sus propios usuarios, asesor comercial y lista de precios, o heredar esa configuración de la empresa.
+Una **empresa** es un cliente corporativo. Puede tener varias **sedes**, cada una con su propio usuario, asesor y lista de precios, o heredarlos de la empresa.
 
 ## Pantalla principal
 
-Se listan las empresas registradas, cada una mostrando:
+Listado de empresas: nombre, NIT, email, teléfono, dirección, cantidad de sedes y acciones (Editar, Eliminar, Expandir).
 
-- Nombre, NIT (si aplica), email, teléfono y dirección.
-- Cantidad de sedes registradas.
-- Botones de **Editar**, **Eliminar** y **Expandir/Contraer** para ver el detalle de sus sedes.
-
-> 🖼️ **CAPTURA:** Vista general de "Empresas" con el listado de tarjetas.
+![Vista general de empresas.](pathname:///papeleriacartagena-docs/img/empresas_1.png)
+*Vista general de empresas.*
 
 ## Crear una empresa
 
-1. Hacer clic en **"+ Nueva Empresa"**.
-2. Diligenciar el **Nombre de la empresa*** (obligatorio).
-3. Diligenciar, si aplica: **NIT**, **Email**, **Teléfono** y **Dirección principal**.
-4. Opcional: **Presupuesto anual (COP)**. Este valor se usa como referencia de consumo: el sistema descuenta de este presupuesto el total de los pedidos **entregados** durante el año en curso, útil para monitorear el consumo frente al acuerdo comercial.
-5. Opcional: seleccionar el **Asesor asignado** en el desplegable. Este asesor queda asociado automáticamente a los pedidos de la empresa (ver [Asignación de asesores comerciales](./10-asignacion-asesores.mdx)).
-6. Hacer clic en **"Crear Empresa"**.
+1. Clic en **"+ Nueva Empresa"**.
+2. **Nombre*** (obligatorio).
+3. NIT, Email, Teléfono, Dirección (opcionales).
+4. Presupuesto anual (COP): referencia de consumo frente a los pedidos entregados en el año.
+5. Asesor asignado (opcional, ver [Asignación de asesores](./10-asignacion-asesores.mdx)).
+6. Clic en **"Crear Empresa"**.
 
-> 🖼️ **CAPTURA:** Modal de creación de empresa con todos sus campos.
+![GIF animado](https://placehold.co/600x400?text=GIF)
+*Crear una empresa y agregar sus sedes.*
 
 :::info Sobre la lista de precios
-La lista de precios de una empresa **no se asigna desde este formulario**. Se configura desde el módulo [Listas de precios](./07-listas-de-precios.mdx), donde se marca qué empresas usan cada lista. Una empresa solo puede pertenecer a una lista a la vez.
+No se asigna desde este formulario, sino desde [Listas de precios](./07-listas-de-precios.mdx).
 :::
 
-## Editar o eliminar una empresa
+## Editar o eliminar
 
-- **Editar**: clic en el ícono de lápiz de la tarjeta, modificar los campos necesarios y guardar.
-- **Eliminar**: clic en el ícono de papelera y confirmar. Se recomienda verificar previamente que la empresa no tenga pedidos activos ni usuarios asociados que dependan de ella.
+- **Editar**: ícono de lápiz.
+- **Eliminar**: verificar antes que la empresa no tenga pedidos activos ni usuarios dependientes.
 
-## Gestión de sedes (sucursales)
+## Sedes (sucursales)
 
-Las sedes se administran dentro del detalle expandido de cada empresa.
+Se administran dentro del detalle expandido de cada empresa.
 
-1. En la tarjeta de la empresa, hacer clic en el ícono de **expandir** (chevron).
-2. Se despliega el panel **"SUCURSALES"** con el listado de sedes existentes (o el mensaje "Sin sucursales registradas" si aún no hay ninguna).
+1. Ícono de expandir en la tarjeta → panel **"SUCURSALES"**.
+2. Clic en **"+ Agregar sucursal"**.
+3. **Nombre*** (ej. "Sede Norte"); Ciudad y Dirección (opcionales).
+4. **Overrides de sucursal** (opcional): Asesor o Lista de precios propios. En blanco = hereda de la empresa.
+5. Clic en **"Agregar Sucursal"**.
 
-> 🖼️ **CAPTURA:** Panel expandido de una empresa mostrando sus sucursales.
+![Crear una sucursal con sus overrides.](pathname:///papeleriacartagena-docs/img/empresas_2.png)
+*Crear una sucursal con sus overrides.*
 
-### Crear una sede
-
-1. Dentro del panel expandido, hacer clic en **"+ Agregar sucursal"**.
-2. Diligenciar el **Nombre de la sucursal*** (obligatorio, por ejemplo "Sede Norte").
-3. Diligenciar opcionalmente **Ciudad** y **Dirección**.
-4. En la sección **"Overrides por sucursal (opcional)"**, definir si esta sede debe tener un **Asesor** o una **Lista de precios** distinta a la de la empresa. Si se deja en blanco ("— Hereda de empresa —"), la sede usa automáticamente el asesor y la lista de precios configurados a nivel de empresa.
-5. Hacer clic en **"Agregar Sucursal"**.
-
-> 🖼️ **CAPTURA:** Modal de creación de sucursal, incluyendo la sección "Overrides por sucursal".
-
-### Editar o eliminar una sede
-
-- **Editar**: ícono de lápiz junto a la sede, dentro del panel expandido.
-- **Eliminar**: ícono de papelera junto a la sede. Verificar previamente que no existan usuarios activos vinculados a esa sede.
+**Editar/Eliminar sede**: íconos de lápiz y papelera junto a la sede (verificar antes que no tenga usuarios activos).
 
 :::tip Cuándo usar un override de sede
-Usar el override de asesor o lista de precios a nivel de sede solo cuando una sucursal puntual de la empresa tiene una condición comercial distinta al resto (por ejemplo, una sede en otra ciudad atendida por otro asesor). Si toda la empresa comparte las mismas condiciones, es más simple configurarlas una sola vez a nivel de empresa y dejar que las sedes hereden esa configuración.
+Solo cuando una sucursal realmente difiere de la empresa (por ejemplo, otra ciudad con otro asesor). Si no, configura una sola vez a nivel de empresa.
 :::

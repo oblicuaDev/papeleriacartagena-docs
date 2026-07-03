@@ -6,54 +6,53 @@ description: Ciclo de vida completo de un pedido y quién puede mover cada trans
 
 # Estados del flujo de pedidos
 
-Todo pedido avanza a través de una secuencia de estados, desde su creación hasta la entrega. Comprender este flujo es clave para dar seguimiento correcto a la operación.
-
-## Diagrama general del flujo
+## Diagrama general
 
 ```
 Pendiente por aprobar ──► Validar disponibilidad ──► Alistamiento ──► En Ruta ──► Entregado
         │
-        └──► Rechazado ──► (puede volver a) Pendiente
+        └──► Rechazado ──► (vuelve a) Pendiente
 ```
 
-Cuando un pedido **no requiere aprobación previa** (porque el usuario que lo creó no tiene un supervisor en su sede), se crea directamente en **Pendiente** y continúa el flujo desde ahí hacia **Validar disponibilidad**.
+Si el creador del pedido no tiene supervisor en su sede, el pedido nace directo en **Pendiente**.
 
 ## Descripción de cada estado
 
 | Estado | Significado | Quién lo produce |
 |---|---|---|
-| **Pendiente por aprobar** | El pedido fue creado por un usuario "creador de pedidos" y espera la revisión de su supervisor. | Automático, al crear el pedido, si existe supervisor en la sede. |
-| **Rechazado** | El supervisor o un administrador rechazó el pedido (por ejemplo, por exceder presupuesto o error en la solicitud). | Supervisor o Administrador. |
-| **Pendiente** | El pedido fue aprobado (o no requería aprobación) y está listo para ser procesado comercialmente. | Aprobación del supervisor/administrador, o creación directa si no hay supervisor. |
-| **Validar disponibilidad** | El equipo interno (asesor o administrador) verifica que haya stock suficiente para todos los ítems del pedido. En este estado se pueden ajustar cantidades o remover ítems sin disponibilidad. | Asesor o Administrador. |
-| **Alistamiento** | El pedido fue confirmado y el personal de bodega lo está preparando (picking/empaque). | Asesor o Administrador. |
-| **En Ruta** | El pedido fue despachado y está en camino con el transportista/repartidor. | Administrador o Repartidor. |
-| **Entregado** | El pedido fue entregado al cliente. Es el estado final del flujo; no admite transiciones posteriores. | Repartidor o Administrador. |
+| **Pendiente por aprobar** | Espera revisión del supervisor. | Automático al crear, si hay supervisor en la sede. |
+| **Rechazado** | El supervisor o un administrador rechazó el pedido. | Supervisor o Administrador. |
+| **Pendiente** | Aprobado (o sin necesidad de aprobación); listo para procesar. | Aprobación, o creación directa. |
+| **Validar disponibilidad** | Se verifica stock; se pueden ajustar ítems. | Asesor o Administrador. |
+| **Alistamiento** | Bodega prepara el pedido (picking/empaque). | Asesor o Administrador. |
+| **En Ruta** | Pedido despachado, en camino. | Administrador o Repartidor. |
+| **Entregado** | Estado final del flujo. | Repartidor o Administrador. |
 
-## Quién puede mover cada transición
+## Quién mueve cada transición
 
 | Rol | Transiciones permitidas |
 |---|---|
-| **Administrador** | Pendiente por aprobar → Validar disponibilidad / Rechazado · Rechazado → Pendiente · Pendiente → Validar disponibilidad · Validar disponibilidad → Alistamiento · Alistamiento → En Ruta · En Ruta → Entregado |
+| **Administrador** | Todas, incluida revertir Rechazado → Pendiente. |
 | **Asesor comercial** | Pendiente → Validar disponibilidad · Validar disponibilidad → Alistamiento |
 | **Supervisor** (cliente) | Pendiente por aprobar → Validar disponibilidad / Rechazado |
 | **Repartidor** | Alistamiento → En Ruta · En Ruta → Entregado |
 
-El **Administrador** es el único rol que puede ejecutar **todas** las transiciones del flujo, incluyendo revertir un pedido **Rechazado** de vuelta a **Pendiente** cuando el rechazo fue un error o el cliente corrigió la solicitud.
+## Cómo cambiar el estado
 
-## Cómo cambiar el estado de un pedido
+1. Ir a `/admin/pedidos` y abrir el pedido (**"Gestionar"**).
+2. Elegir el nuevo estado en el desplegable (solo aparecen los válidos para el rol actual).
+3. Motivo del cambio (opcional, recomendado en rechazos o ajustes).
+4. Clic en **"Guardar estado"**.
 
-1. Ir a `/admin/pedidos` y abrir el pedido (botón **"Gestionar"**).
-2. En el bloque de **cambio de estado**, seleccionar en el desplegable el nuevo estado (solo aparecen los estados a los que el pedido puede avanzar según el rol del usuario actual).
-3. Diligenciar opcionalmente el **motivo del cambio**, especialmente recomendable en rechazos o ajustes de disponibilidad.
-4. Hacer clic en **"Guardar estado"**.
+![GIF animado](https://placehold.co/600x400?text=GIF)
+*Cambiar el estado de un pedido paso a paso.*
 
-Cada cambio de estado queda registrado en el historial del pedido con la fecha, el usuario responsable y el motivo indicado, lo que permite auditar el recorrido completo de cualquier pedido.
+Cada cambio queda en el historial del pedido con fecha, usuario y motivo, permitiendo auditar su recorrido completo.
 
 :::warning Sobre el rechazo de pedidos
-Un pedido **Rechazado** no continúa automáticamente: requiere que un administrador lo regrese manualmente a **Pendiente** para que el flujo continúe, luego de que se resuelva el motivo del rechazo con el cliente.
+Un pedido Rechazado no avanza solo: un administrador debe devolverlo manualmente a Pendiente.
 :::
 
-:::info Edición de ítems en "Validar disponibilidad"
-Es el único estado del flujo donde se permite modificar las cantidades o remover productos del pedido (por falta de stock, por ejemplo). Cualquier ajuste debe acompañarse de un motivo, visible luego en el historial del pedido. Ver [Gestión y seguimiento de pedidos](./11-gestion-pedidos.mdx).
+:::info Edición de ítems
+Solo en "Validar disponibilidad" se pueden ajustar cantidades o quitar productos. Ver [Gestión de pedidos](./11-gestion-pedidos.mdx).
 :::

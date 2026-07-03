@@ -4,68 +4,68 @@ title: Preguntas frecuentes e incidencias comunes
 description: Solución a los problemas más comunes al administrar la plataforma.
 ---
 
-# Preguntas frecuentes y solución de incidencias comunes
+# Preguntas frecuentes e incidencias comunes
 
 ## Acceso
 
-**No puedo iniciar sesión, dice "Credenciales incorrectas".**
-Verificar que el correo y la contraseña no tengan espacios adicionales ni errores de tipeo. Si el problema persiste, solicitar a otro administrador que verifique el usuario en [Usuarios y roles](./09-usuarios-y-roles.mdx) o que restablezca la contraseña.
+**"Credenciales incorrectas" al iniciar sesión.**
+Revisa espacios o errores de tipeo. Si persiste, pide a otro administrador que verifique el usuario en [Usuarios y roles](./09-usuarios-y-roles.mdx) o restablezca la contraseña.
 
-**El sistema me saca de la sesión sin razón aparente.**
-La sesión tiene una vigencia de **8 horas**. Pasado ese tiempo, el sistema redirige automáticamente al login. Es un comportamiento esperado; basta con volver a iniciar sesión. Ver [Acceso y autenticación](./02-acceso-autenticacion.mdx).
+**El sistema me saca de la sesión sin razón.**
+La sesión dura 8 horas; es normal, vuelve a iniciar sesión. Ver [Acceso y autenticación](./02-acceso-autenticacion.mdx).
 
 ## Categorías y productos
 
 **No puedo eliminar una categoría.**
-El sistema no permite eliminar categorías que tienen productos asociados. Es necesario reasignar esos productos a otra categoría antes de eliminarla. Ver [Administración de categorías](./04-administracion-categorias.mdx).
+Tiene productos asociados. Reasígnalos a otra categoría primero. Ver [Administración de categorías](./04-administracion-categorias.mdx).
 
 **Subí un producto con el SKU equivocado.**
-Editar el producto desde `/admin/catalogo` (ícono de lápiz) y corregir el campo SKU manualmente. No es necesario eliminarlo y volver a crearlo.
+Edítalo desde `/admin/catalogo` y corrige el SKU. No hace falta recrearlo.
 
-**Un producto no aparece en el catálogo del cliente aunque lo creé.**
-Verificar que el checkbox **"Producto activo"** esté marcado y que **"Este producto no hace parte del catálogo"** no esté seleccionado. También revisar que la categoría del producto esté activa.
+**Un producto no aparece en el catálogo del cliente.**
+Verifica que esté marcado **"Producto activo"**, que no tenga marcado **"No hace parte del catálogo"**, y que su categoría esté activa.
 
 ## Importación masiva
 
-**El sistema dice "Categoría '`{nombre}`' no encontrada" al importar.**
-El nombre de la categoría en el archivo Excel/CSV no coincide con ninguna categoría existente. Verificar la ortografía exacta o crear primero la categoría en [Administración de categorías](./04-administracion-categorias.mdx) antes de reintentar la importación de esas filas.
+**"Categoría no encontrada" al importar.**
+El nombre en el archivo no coincide con ninguna existente. Verifica la ortografía o créala primero.
 
-**Importé un archivo pero algunos productos no se cargaron.**
-Revisar la previsualización del paso 2: las filas marcadas con error (⚠) no se importan. El motivo del error se muestra junto a cada fila. Corregir el archivo original en esas filas específicas y volver a importarlas. Ver [Importación masiva de productos](./06-importacion-masiva-productos.mdx).
+**Algunos productos no se cargaron.**
+Revisa la previsualización: las filas con error (⚠) no se importan. Corrige el archivo y reintenta esas filas. Ver [Importación masiva](./06-importacion-masiva-productos.mdx).
 
 ## Listas de precios
 
-**Asigné una empresa a una lista de precios, pero seguía facturando con la anterior.**
-Una empresa solo puede tener una lista de precios activa a la vez; la asignación más reciente reemplaza a la anterior. Verificar en `/admin/listas-precios`, dentro de "Empresas" de la lista correspondiente, que la empresa efectivamente quedó marcada en la lista deseada.
+**Asigné una empresa a una lista, pero sigue facturando con la anterior.**
+Una empresa solo tiene una lista activa a la vez; la asignación más reciente reemplaza a la anterior. Verifica en `/admin/listas-precios`, dentro de "Empresas" de esa lista.
 
-**Un producto no tiene el precio especial que definí en la lista.**
-Verificar que el precio se haya guardado correctamente en el modal "Precios" de esa lista (campo no vacío) y que la empresa/sede del cliente esté efectivamente asignada a esa lista y no a otra distinta a nivel de sede (los overrides de sede tienen prioridad).
+**Un producto no tiene el precio especial definido.**
+Verifica que el precio esté guardado en esa lista y que la empresa/sede esté asignada a ella (los overrides de sede tienen prioridad).
 
 ## Empresas, sedes y usuarios
 
 **Un pedido aparece "sin asesor asignado".**
-Ocurre cuando ni la sede ni la empresa del cliente tienen un asesor configurado. Asignar el asesor en [Empresas y sedes](./08-empresas-y-sedes.mdx) o directamente en el detalle del pedido afectado (ver [Asignación de asesores comerciales](./10-asignacion-asesores.mdx)). Los pedidos futuros de esa empresa/sede quedarán asociados automáticamente una vez configurado.
+Ni la sede ni la empresa tienen asesor configurado. Asígnalo en [Empresas y sedes](./08-empresas-y-sedes.mdx) o directamente en el detalle del pedido.
 
-**Un cliente no puede aprobar pedidos aunque debería poder.**
-Verificar que su rol esté configurado como **Supervisor** (no "Creador de pedidos") en [Usuarios y roles](./09-usuarios-y-roles.mdx), y que pertenezca a la misma sede que los usuarios cuyos pedidos debe aprobar.
+**Un cliente no puede aprobar pedidos.**
+Verifica que su rol sea **Supervisor** (no Creador de pedidos) y que pertenezca a la misma sede. Ver [Usuarios y roles](./09-usuarios-y-roles.mdx).
 
-**No puedo cambiar el rol de un asesor a repartidor (o viceversa).**
-El campo Rol de personal interno no se puede modificar después de creado el usuario. Es necesario crear un nuevo usuario con el rol correcto y desactivar el anterior.
+**No puedo cambiar el rol de un asesor a repartidor.**
+El campo Rol no se puede modificar tras crear el usuario. Crea uno nuevo y desactiva el anterior.
 
 ## Pedidos
 
-**Un pedido quedó "Rechazado" pero el cliente corrigió lo que se pidió.**
-Solo un **Administrador** puede regresar un pedido de "Rechazado" a "Pendiente". Ir al detalle del pedido y usar el bloque de cambio de estado. Ver [Estados del flujo de pedidos](./12-estados-flujo-pedidos.mdx).
+**Un pedido quedó "Rechazado" pero ya se corrigió.**
+Solo un Administrador puede devolverlo a "Pendiente". Ver [Estados del flujo](./12-estados-flujo-pedidos.mdx).
 
-**Necesito quitar un producto de un pedido porque no hay stock.**
-Esto solo es posible mientras el pedido está en el estado **"Validar disponibilidad"**. Abrir el detalle del pedido, editar la tabla de ítems, remover el producto e indicar el motivo del ajuste.
+**Necesito quitar un producto por falta de stock.**
+Solo es posible en el estado **"Validar disponibilidad"**: edita los ítems e indica el motivo.
 
-**No encuentro un pedido específico en el listado.**
-El listado de `/admin/pedidos` no tiene buscador de texto libre; usar el filtro de **Estado** para acotar la vista y ubicar el pedido revisando la columna Cliente y la fecha.
+**No encuentro un pedido en el listado.**
+No hay buscador de texto libre; usa el filtro de Estado y revisa la columna Cliente.
 
 **No puedo descargar el reporte de pedidos.**
-Verificar que el navegador no esté bloqueando la descarga de archivos (revisar la barra de notificaciones del navegador) y que exista al menos un pedido que cumpla el filtro de estado aplicado.
+Verifica que el navegador no bloquee la descarga y que exista al menos un pedido con el filtro aplicado.
 
-## ¿A quién contactar si el problema persiste?
+## ¿A quién contactar?
 
-Si después de seguir las indicaciones de esta sección el problema continúa, o si se trata de un comportamiento inesperado no descrito aquí, contactar al equipo técnico responsable del mantenimiento de la plataforma, indicando: el usuario y rol con el que se presentó el problema, la pantalla exacta, y —de ser posible— una captura de pantalla del error.
+Si el problema persiste, contacta al equipo técnico indicando: usuario y rol, pantalla exacta y, si es posible, una captura del error.

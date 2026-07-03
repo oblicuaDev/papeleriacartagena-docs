@@ -4,65 +4,59 @@ title: Listas de precios
 description: Cómo crear listas de precios personalizadas y asignarlas a empresas.
 ---
 
-# Gestión de listas de precios y su asignación a empresas
+# Listas de precios
 
-Una **lista de precios** define un precio fijo por producto para un grupo de empresas, permitiendo ofrecer condiciones comerciales personalizadas (por ejemplo, descuentos por volumen o acuerdos comerciales específicos) sin modificar el precio base del catálogo general.
+Una lista de precios fija un precio por producto para un grupo de empresas, sin modificar el precio base del catálogo general.
 
 **Ruta:** `/admin/listas-precios`
 
 ## Pantalla principal
 
-Se muestran tarjetas, una por cada lista de precios creada, con:
+Tarjetas por lista, con nombre, descripción, productos con precio, empresas asignadas y los botones **"$ Precios"**, **"🏢 Empresas"**, Editar y Eliminar.
 
-- Nombre y descripción de la lista.
-- **Productos con precio**: cantidad de productos que tienen un precio específico definido en esa lista.
-- **Empresas asignadas**: cantidad de empresas que usan esa lista.
-- Botones **"$ Precios"** (para editar los precios) y **"🏢 Empresas"** (para asignar empresas).
-- Botones de **Editar** y **Eliminar** en la esquina de la tarjeta.
+![Vista general de listas de precios.](pathname:///papeleriacartagena-docs/img/precios_1.png)
+*Vista general de listas de precios.*
 
-> 🖼️ **CAPTURA:** Vista general de "Listas de Precios" con las tarjetas de cada lista.
+## Crear una lista
 
-## Crear una lista de precios
+1. Clic en **"+ Nueva lista"**.
+2. **Nombre*** (ej. "Cliente Centro - Abril") y Descripción interna (opcional).
+3. Clic en **"Crear lista"**.
 
-1. Hacer clic en **"+ Nueva lista"**.
-2. Diligenciar el **Nombre*** (por ejemplo, "Cliente Centro - Abril").
-3. Diligenciar opcionalmente una **Descripción** para uso interno (notas sobre el acuerdo comercial).
-4. Hacer clic en **"Crear lista"**.
+La lista nace vacía: todos los productos usan el precio base hasta que se definan precios propios.
 
-La lista se crea vacía: por defecto, todos los productos usan el precio base del catálogo hasta que se definan precios específicos.
+## Definir precios
 
-## Definir los precios de una lista
+1. Clic en **"$ Precios"** en la tarjeta.
+2. Buscar el producto por nombre o SKU.
+3. Escribir el **Precio en lista** (vacío o cero = usa el precio base).
+4. Clic en **"Guardar precios"**.
 
-1. En la tarjeta de la lista, hacer clic en **"$ Precios"**.
-2. Usar el buscador para localizar productos por nombre o SKU.
-3. Para cada producto, diligenciar el campo **Precio en lista**. Dejar el campo vacío (o en cero) hace que ese producto use el **precio base** del catálogo para las empresas asignadas a esta lista.
-4. Hacer clic en **"Guardar precios"**.
-
-> 🖼️ **CAPTURA:** Modal "Precios de `{lista}`" mostrando la tabla de SKU, producto, precio base y precio en lista.
+![Modal de precios de la lista.](pathname:///papeleriacartagena-docs/img/precios_2.png)
+*Modal de precios de la lista.*
 
 :::info
-No es necesario definir un precio especial para todos los productos del catálogo. Solo los productos con condiciones comerciales distintas al precio base necesitan un valor en la lista; el resto se factura automáticamente al precio base.
+Solo es necesario definir precio para los productos con condición comercial distinta; el resto factura al precio base.
 :::
 
-## Asignar empresas a una lista de precios
+## Asignar empresas
 
-1. En la tarjeta de la lista, hacer clic en **"🏢 Empresas"**.
-2. Marcar las casillas de las empresas que deben usar esta lista de precios.
-3. Hacer clic en **"Guardar asignaciones"**.
+1. Clic en **"🏢 Empresas"** en la tarjeta.
+2. Marcar las empresas que usarán esta lista.
+3. Clic en **"Guardar asignaciones"**.
 
-> 🖼️ **CAPTURA:** Modal "Empresas asignadas a `{lista}`" con la lista de checkboxes de empresas.
+![GIF animado](https://placehold.co/600x400?text=GIF)
+*Crear una lista, definir precios y asignar empresas.*
 
 :::warning Una lista por empresa
-Una empresa solo puede estar asignada a **una lista de precios a la vez** a nivel general. Si se intenta asignar una empresa que ya tiene otra lista asignada, el sistema la marca con la etiqueta **"Tiene otra lista"** como advertencia; al guardar, la asignación más reciente reemplaza a la anterior.
-
-Las **sedes** y los **usuarios individuales** sí pueden tener su propia lista de precios como excepción puntual (override), configurada desde [Empresas y sedes](./08-empresas-y-sedes.mdx). Cuando una sede no tiene lista propia, hereda la lista asignada a la empresa.
+Una empresa solo puede tener **una lista a la vez**; asignar otra reemplaza la anterior. Sedes y usuarios sí pueden tener su propio override (ver [Empresas y sedes](./08-empresas-y-sedes.mdx)).
 :::
 
-## Editar o eliminar una lista
+## Editar o eliminar
 
-- **Editar**: clic en el ícono de lápiz en la tarjeta, permite cambiar el nombre o la descripción (no los precios, que se editan desde "$ Precios").
-- **Eliminar**: clic en el ícono de papelera. Al eliminar una lista, las empresas que la tenían asignada vuelven a usar el precio base del catálogo.
+- **Editar**: cambia nombre o descripción (los precios se editan en "$ Precios").
+- **Eliminar**: las empresas asignadas vuelven al precio base.
 
 :::tip Buena práctica
-Nombrar las listas de forma que se identifique claramente su propósito y vigencia (por ejemplo, incluyendo el nombre del cliente y el mes/año del acuerdo), para facilitar su mantenimiento cuando existan varias decenas de listas activas.
+Nombra las listas con el cliente y su vigencia para identificarlas fácilmente entre varias decenas activas.
 :::

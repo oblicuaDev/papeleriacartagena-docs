@@ -50,7 +50,9 @@ const config: Config = {
   themeConfig: {
     image: 'img/logo-cartagena.jpg',
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: 'light',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'Papelería Cartagena',
@@ -84,7 +86,6 @@ const config: Config = {
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
 };

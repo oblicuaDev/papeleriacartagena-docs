@@ -6,53 +6,45 @@ description: Propósito del manual y alcance funcional del panel de administraci
 
 # Introducción y alcance del sistema
 
-## Propósito de este manual
+## Para quién es este manual
 
-Este manual está dirigido al **personal encargado de la configuración y gestión** de la plataforma B2B de Papelería Cartagena: administradores del sistema, coordinadores comerciales y cualquier usuario con el rol **Administrador**.
+Dirigido a administradores del sistema y coordinadores comerciales (rol **Administrador**). Su objetivo es que puedan operar la plataforma sin depender del equipo de desarrollo.
 
-Su objetivo es permitir que este personal pueda **administrar de manera autónoma** la información maestra de la plataforma (categorías, productos, listas de precios, empresas, sedes, usuarios) y los procesos administrativos del día a día (gestión de pedidos, asignación de asesores, generación de reportes), sin depender del equipo de desarrollo una vez el sistema esté en operación.
-
-Este documento **no cubre** el uso de la plataforma desde el punto de vista del cliente comprador (catálogo, carrito, confirmación de pedidos). Esa guía se encuentra publicada dentro de la propia aplicación en la ruta `/manual`, y está pensada para los usuarios de las empresas cliente.
+Este manual **no cubre** la vista del cliente comprador (catálogo, carrito, pedidos). Esa guía está publicada dentro de la app, en `/manual`.
 
 ## ¿Qué es la plataforma?
 
-La plataforma de Papelería Cartagena es un **sistema de proveeduría integral B2B** para la gestión de pedidos de papelería y suministros de oficina. Permite que empresas cliente (con una o varias sedes) hagan pedidos recurrentes bajo condiciones comerciales propias (listas de precios personalizadas), con un flujo de aprobación interno y seguimiento logístico hasta la entrega.
+Sistema B2B de proveeduría para pedidos de papelería y suministros de oficina. Las empresas cliente (con una o varias sedes) hacen pedidos recurrentes con precios propios, aprobación interna y seguimiento hasta la entrega.
 
-El sistema contempla cuatro roles principales, cada uno con su propio panel:
+| Rol                  | Panel       | Función                                     |
+| -------------------- | ----------- | ------------------------------------------- |
+| **Administrador**    | `/admin`    | Configura todo y supervisa la operación.    |
+| **Asesor comercial** | `/asesor`   | Gestiona pedidos de sus empresas asignadas. |
+| **Cliente**          | `/cliente`  | Crea y, si aplica, aprueba pedidos.         |
+| **Repartidor**       | `/entregas` | Alista, despacha y entrega pedidos.         |
 
-| Rol | Panel | Función principal |
-|---|---|---|
-| **Administrador** | `/admin` | Configura la información maestra y supervisa toda la operación. |
-| **Asesor comercial** | `/asesor` | Gestiona los pedidos de las empresas que tiene asignadas. |
-| **Cliente** (comprador / supervisor) | `/cliente` | Crea y, si aplica, aprueba pedidos de su empresa. |
-| **Repartidor** | `/entregas` | Confirma el alistamiento, despacho y entrega de pedidos. |
+Este manual cubre el **panel de Administrador**.
 
-Este manual se enfoca en el **panel de Administrador**, que es el punto de control central de toda la plataforma.
+## Qué se puede hacer desde Administración
 
-## Alcance funcional del panel de administración
+- Catálogo de productos y categorías (+ cargas masivas por Excel/CSV).
+- Listas de precios por empresa.
+- Empresas y sedes (presupuestos, overrides).
+- Usuarios: clientes, asesores, repartidores.
+- Asignación de asesores comerciales.
+- Seguimiento de pedidos en todos sus estados.
+- Reportes (CSV/Excel) y órdenes de compra en PDF.
+- Dashboard con indicadores de la operación.
 
-Desde el panel de administración es posible:
+<video src="pathname:///papeleriacartagena-docs/video/intro_1.mp4" autoPlay loop muted playsInline controls width="100%" />
+_Recorrido general del panel de administración._
 
-- Gestionar el **catálogo de productos** y sus **categorías**.
-- Realizar **cargas masivas** de productos desde archivos Excel/CSV.
-- Crear y asignar **listas de precios** personalizadas por empresa.
-- Administrar **empresas** y sus **sedes** (sucursales), incluyendo presupuestos y overrides comerciales.
-- Crear y gestionar **usuarios** (clientes, asesores y repartidores) y sus roles.
-- **Asignar asesores comerciales** a empresas y sedes.
-- Dar **seguimiento a los pedidos** en todos sus estados, editar ítems, agregar comentarios y adjuntos.
-- **Descargar reportes** (CSV/Excel) y **órdenes de compra en PDF**.
-- Consultar el **dashboard** con indicadores de la operación (pedidos, productos, clientes, histórico de consumo).
+## Cómo leer este manual
 
-## Convenciones usadas en este manual
+- **\*** marca un campo obligatorio.
+- Rutas como `/admin/seccion` corresponden a la dirección en el navegador.
+- Los recuadros grises con "Captura" o "GIF" son placeholders: van donde debe insertarse una captura de pantalla o un GIF animado real, descrito en el texto en cursiva debajo de cada uno.
 
-- Los campos marcados con **\*** en los formularios de la plataforma son obligatorios.
-- Las rutas de navegación se indican como `/admin/seccion`, correspondientes a la barra de dirección del navegador.
-- Los bloques como el siguiente indican dónde debe insertarse una captura de pantalla actualizada de la plataforma:
-
-  > 🖼️ **CAPTURA:** Ejemplo de bloque de captura de pantalla.
-
-- Los pasos numerados describen el procedimiento exacto tal como debe ejecutarse en la interfaz.
-
-:::info Estado de las capturas de pantalla
-Las capturas de este manual están pendientes de inserción. Cada sección incluye marcadores `CAPTURA:` indicando qué pantalla debe fotografiarse y en qué punto del flujo. Se recomienda actualizarlas cada vez que cambie el diseño del panel de administración.
+:::info Material visual pendiente
+Las capturas y GIFs de este manual están por grabarse. Reemplaza cada placeholder por el archivo real y actualízalo cada vez que cambie el diseño del panel de administración.
 :::

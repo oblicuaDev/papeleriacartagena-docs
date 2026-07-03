@@ -6,67 +6,48 @@ description: Cómo crear, editar, desactivar y relacionar categorías de product
 
 # Administración de categorías
 
-Las categorías organizan el catálogo de productos (por ejemplo: Papel, Escritura, Aseo, Tecnología) y se usan como filtro en el catálogo y como base para las reglas de importación masiva.
-
 **Ruta:** `/admin/centros-de-costos`
+
+Las categorías organizan el catálogo (Papel, Escritura, Aseo, Tecnología...) y sirven como filtro y como base para la importación masiva.
 
 ## Pantalla principal
 
-Al ingresar se muestra:
+Cuadrícula de tarjetas por categoría, con nombre, descripción, estado (Activa/Inactiva), cantidad de productos y acciones: Editar, Categorías relacionadas, Activar/Desactivar, Eliminar.
 
-- El título **"Categorías de Productos"** y un contador con el total de categorías configuradas.
-- El botón **"+ Nueva Categoría"**.
-- Una cuadrícula de tarjetas, una por categoría, con:
-  - Ícono y nombre de la categoría.
-  - Descripción (si fue diligenciada).
-  - Estado: **Activa** (verde) o **Inactiva** (gris).
-  - Cantidad de productos asociados a esa categoría.
-  - Botones de acción: **Editar**, **Categorías relacionadas**, **Activar/Desactivar** y **Eliminar**.
-
-> 🖼️ **CAPTURA:** Vista general de "Categorías de Productos" con la cuadrícula de tarjetas.
+![Captura de pantalla](pathname:///papeleriacartagena-docs/img/categorias_1.png)
+_Vista general de categorías._
 
 ## Crear una categoría
 
-1. Hacer clic en **"+ Nueva Categoría"**.
-2. Diligenciar el campo **Nombre*** (obligatorio).
-3. Diligenciar opcionalmente el campo **Descripción**.
-4. Verificar que el checkbox **"Categoría activa"** esté marcado si la categoría debe estar disponible de inmediato (por defecto viene activada).
-5. Hacer clic en **"Crear Categoría"**.
+1. Clic en **"+ Nueva Categoría"**.
+2. **Nombre\*** (obligatorio) y **Descripción** (opcional).
+3. Checkbox **"Categoría activa"** (activado por defecto).
+4. Clic en **"Crear Categoría"**.
 
-> 🖼️ **CAPTURA:** Modal de creación de categoría con los campos Nombre, Descripción y el checkbox "Categoría activa".
+![GIF animado](https://placehold.co/600x400?text=GIF)
+_Crear y editar una categoría._
 
-## Editar una categoría
+## Editar, activar/desactivar o eliminar
 
-1. En la tarjeta de la categoría, hacer clic en el ícono de **Editar** (lápiz).
-2. Modificar los campos necesarios.
-3. Hacer clic en **"Guardar Cambios"**.
-
-## Activar o desactivar una categoría
-
-Desactivar una categoría la oculta del catálogo público sin eliminar la información ni los productos asociados. Es la forma recomendada de "retirar" temporalmente una categoría.
-
-1. En la tarjeta, hacer clic en el ícono de **ojo/ojo tachado**.
-2. El estado cambia inmediatamente entre Activa e Inactiva.
-
-## Eliminar una categoría
-
-1. En la tarjeta, hacer clic en el ícono de **papelera**.
-2. Confirmar la eliminación.
+- **Editar**: ícono de lápiz → modificar → **Guardar Cambios**.
+- **Activar/Desactivar**: ícono de ojo. Oculta la categoría del catálogo sin borrar nada; es la forma recomendada de "retirarla".
+- **Eliminar**: ícono de papelera → confirmar.
 
 :::warning Restricción
-Si la categoría tiene productos asociados, el sistema no permite eliminarla y muestra el mensaje: *"La categoría '`{nombre}`' tiene `{N}` producto(s) asociado(s). Reasígnalos antes de eliminar."* Es necesario reasignar previamente esos productos a otra categoría (editándolos uno a uno o mediante una nueva importación) antes de poder eliminarla.
+No se puede eliminar una categoría con productos asociados. Reasigna esos productos a otra categoría antes de eliminarla.
 :::
 
 ## Categorías relacionadas (cross-selling)
 
-Esta función permite definir qué categorías se sugieren como "productos relacionados" cuando un cliente está viendo productos de una categoría determinada, favoreciendo la venta cruzada.
+Define qué categorías se sugieren al ver productos de otra (por ejemplo, "Impresión" con "Papel" y "Tóner").
 
-1. En la tarjeta de la categoría, hacer clic en el ícono de **enlace/categorías relacionadas**.
-2. En el modal, marcar las casillas de las categorías que se quieren sugerir de forma cruzada desde la categoría actual. Las categorías inactivas aparecen marcadas con la etiqueta **"(inactiva)"**.
-3. Hacer clic en **"Guardar"**.
+1. Ícono de enlace en la tarjeta.
+2. Marcar las categorías relacionadas.
+3. Clic en **"Guardar"**.
 
-> 🖼️ **CAPTURA:** Modal de "Categorías relacionadas" con la lista de checkboxes.
+![Modal de categorías relacionadas.](pathname:///papeleriacartagena-docs/img/categorias_2.png)
+_Modal de categorías relacionadas._
 
 :::tip Buena práctica
-Definir categorías relacionadas de forma coherente con la lógica de compra del cliente (por ejemplo, relacionar "Impresión" con "Papel" y "Tóner") mejora la experiencia de compra y el ticket promedio.
+Relaciona categorías según la lógica real de compra del cliente para mejorar la experiencia y el ticket promedio.
 :::

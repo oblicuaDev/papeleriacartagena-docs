@@ -6,38 +6,36 @@ description: Cómo exportar reportes de pedidos y descargar órdenes de compra e
 
 # Descarga de órdenes de compra y reportes
 
-## Exportar el listado de pedidos (CSV / Excel)
+## Exportar pedidos (CSV / Excel)
 
-**Ubicación:** `/admin/pedidos`, botones **"CSV"** y **"Excel"** junto al filtro de estado.
+**Ubicación:** `/admin/pedidos`, botones **CSV** y **Excel**.
 
-1. Opcionalmente, aplicar el filtro de **Estado** para acotar el reporte a un subconjunto de pedidos (por ejemplo, solo los "Entregado" del mes).
-2. Hacer clic en **"CSV"** para un archivo de texto separado por comas, o en **"Excel"** para un archivo `.xlsx` con formato de tabla.
-3. El navegador descarga automáticamente el archivo con el nombre `pedidos_{fecha}.csv` o `pedidos_{fecha}.xlsx`.
+1. Filtrar por Estado (opcional).
+2. Clic en **CSV** o **Excel**.
+3. Se descarga `pedidos_{fecha}.csv` o `.xlsx`.
 
-> 🖼️ **CAPTURA:** Botones "CSV" y "Excel" en la pantalla de "Trabajar Pedidos".
+![Botones "CSV" y "Excel".](pathname:///papeleriacartagena-docs/img/reportes_1.png)
+*Botones "CSV" y "Excel".*
 
-### Contenido del reporte
-
-El archivo exportado incluye, por cada pedido: ID, cliente, empresa, asesor, fecha, total, estado, y el detalle de ítems (SKU, producto, cantidad, precio unitario y total de cada línea).
+El archivo incluye, por pedido: ID, cliente, empresa, asesor, fecha, total, estado e ítems (SKU, cantidad, precio y total de cada línea).
 
 :::tip Uso recomendado
-Usar la exportación a **Excel** cuando el reporte se vaya a analizar o cruzar con otras hojas de cálculo (por ejemplo, para conciliar con contabilidad), y **CSV** cuando se necesite cargar los datos en otro sistema.
+Usa **Excel** para analizar o cruzar datos (ej. con contabilidad); **CSV** para cargarlos en otro sistema.
 :::
 
-## Descargar la orden de compra en PDF
+## Orden de compra en PDF
 
-Cada pedido individual puede descargarse como un documento PDF con el formato de **orden de compra**, útil para enviar al cliente o archivar como soporte.
+1. Ir a `/admin/pedidos` y abrir el pedido.
+2. Clic en el botón de **descarga de PDF**.
+3. Se descarga el documento: membrete, número, fecha, cliente, ítems, totales, observaciones y transportista.
 
-1. Ir a `/admin/pedidos` y abrir el pedido correspondiente (botón **"Gestionar"**).
-2. En la sección de información general del pedido, hacer clic en el botón de **descarga de PDF**.
-3. El navegador descarga el archivo con el detalle del pedido: membrete de Papelería Cartagena, número de pedido, fecha, datos del cliente, tabla de ítems con cantidades y precios, totales, observaciones y transportista.
+![GIF animado](https://placehold.co/600x400?text=GIF)
+*Descargar la orden de compra en PDF.*
 
-> 🖼️ **CAPTURA:** Botón de descarga de PDF en el detalle del pedido y ejemplo del documento generado.
+## Adjuntos
 
-## Adjuntos de un pedido
+Los archivos manuales (facturas, recibos, evidencias u otras órdenes de compra) se gestionan desde la sección **Adjuntos** del pedido — ver [Gestión de pedidos](./11-gestion-pedidos.mdx).
 
-Además del PDF generado por el sistema, cada pedido puede tener **archivos adjuntos** cargados manualmente (facturas, recibos, evidencias de entrega, u otras órdenes de compra recibidas del cliente). Estos se gestionan desde la sección **Adjuntos** del detalle del pedido — ver [Gestión y seguimiento de pedidos](./11-gestion-pedidos.mdx) — y se descargan individualmente con el botón de descarga junto a cada archivo.
-
-:::info Diferencia entre el PDF del sistema y los adjuntos
-El **PDF de orden de compra** es generado automáticamente por la plataforma con los datos actuales del pedido. Los **adjuntos** son archivos externos cargados manualmente (por ejemplo, la orden de compra oficial enviada por el cliente en su propio formato, o el soporte de entrega firmado). Ambos coexisten en el mismo pedido y sirven para propósitos distintos.
+:::info Diferencia entre el PDF y los adjuntos
+El PDF lo genera el sistema automáticamente con los datos actuales del pedido. Los adjuntos son archivos externos cargados a mano. Ambos coexisten en el mismo pedido.
 :::
