@@ -9,22 +9,26 @@ description: Ciclo de vida completo de un pedido y quién puede mover cada trans
 ## Diagrama general
 
 ```
-Pendiente por aprobar ──► Validar disponibilidad ──► Alistamiento ──► En Ruta ──► Entregado
-        │
-        └──► Rechazado ──► (vuelve a) Pendiente
+                 (aprueba supervisor / admin. de contrato / admin)
+Pendiente por aprobar ───────────────────────────► Validar disponibilidad ──► Alistamiento ──► En Ruta ──► Entregado
+        │                                                    ▲
+        └──► Rechazado ──(admin)──► Pendiente ───────────────┘
 ```
 
-Si el creador del pedido no tiene supervisor en su sede, el pedido nace directo en **Pendiente**.
+- Un pedido creado por un **Creador de pedidos** nace en **"Pendiente por aprobar"**.
+- Un pedido creado por un **Supervisor** o un **Administrador de Contrato** nace directo en **"Validar disponibilidad"** (se autoaprueban).
+- Al aprobar, el pedido pasa **directamente a "Validar disponibilidad"** (ya no existe un paso intermedio por "Pendiente").
+- **"Pendiente"** quedó como estado *legacy*: solo aparece en pedidos antiguos o cuando un administrador revierte un "Rechazado". Un admin puede empujarlo a "Validar disponibilidad".
 
 ## Descripción de cada estado
 
 | Estado | Significado | Quién lo produce |
 |---|---|---|
-| **Pendiente por aprobar** | Espera revisión del supervisor. | Automático al crear, si hay supervisor en la sede. |
-| **Rechazado** | El supervisor o un administrador rechazó el pedido. | Supervisor o Administrador. |
-| **Pendiente** | Aprobado (o sin necesidad de aprobación); listo para procesar. | Aprobación, o creación directa. |
-| **Validar disponibilidad** | Se verifica stock; se pueden ajustar ítems. | Asesor o Administrador. |
-| **Alistamiento** | Bodega prepara el pedido (picking/empaque). | Asesor o Administrador. |
+| **Pendiente por aprobar** | Espera aprobación. | Automático al crear un pedido de un Creador de pedidos. |
+| **Rechazado** | Se rechazó el pedido (con motivo). | Supervisor, Administrador de Contrato o Administrador. |
+| **Pendiente** (legacy) | Estado histórico de "aprobado" del flujo anterior. | Reversión de un "Rechazado" por un Administrador. |
+| **Validar disponibilidad** | El asesor verifica stock y ajusta ítems. | Aprobación del pedido, o creación por Supervisor / Administrador de Contrato. |
+| **Alistamiento** | Bodega prepara el pedido (picking/empaque). | Asesor o Administrador; **también automáticamente** al asignar un repartidor. |
 | **En Ruta** | Pedido despachado, en camino. | Administrador o Repartidor. |
 | **Entregado** | Estado final del flujo. | Repartidor o Administrador. |
 
@@ -32,10 +36,10 @@ Si el creador del pedido no tiene supervisor en su sede, el pedido nace directo 
 
 | Rol | Transiciones permitidas |
 |---|---|
-| **Administrador** | Todas, incluida revertir Rechazado → Pendiente. |
-| **Asesor comercial** | Pendiente → Validar disponibilidad · Validar disponibilidad → Alistamiento |
-| **Supervisor** (cliente) | Pendiente por aprobar → Validar disponibilidad / Rechazado |
-| **Repartidor** | Alistamiento → En Ruta · En Ruta → Entregado |
+| **Administrador** | Todas: "Pendiente por aprobar → Validar disponibilidad / Rechazado", "Rechazado → Pendiente", "Pendiente → Validar disponibilidad", "Validar disponibilidad → Alistamiento", "Alistamiento → En Ruta", "En Ruta → Entregado". |
+| **Asesor comercial** | "Validar disponibilidad → Alistamiento" (y "Pendiente" legacy → "Validar disponibilidad"). Con **cobertura total**, sobre pedidos de cualquier vendedor. |
+| **Supervisor** / **Administrador de Contrato** | "Pendiente por aprobar → Validar disponibilidad" o "→ Rechazado". El Supervisor solo en su sede; el Administrador de Contrato en toda la empresa. |
+| **Repartidor** | "Alistamiento → En Ruta" · "En Ruta → Entregado". |
 
 ## Cómo cambiar el estado
 
@@ -47,9 +51,13 @@ Si el creador del pedido no tiene supervisor en su sede, el pedido nace directo 
 Cada cambio queda en el historial del pedido con fecha, usuario y motivo, permitiendo auditar su recorrido completo.
 
 :::warning Sobre el rechazo de pedidos
-Un pedido Rechazado no avanza solo: un administrador debe devolverlo manualmente a Pendiente.
+Un pedido Rechazado no avanza solo: un administrador debe devolverlo manualmente a "Pendiente" y desde ahí empujarlo a "Validar disponibilidad".
 :::
 
 :::info Edición de ítems
-Solo en "Validar disponibilidad" se pueden ajustar cantidades o quitar productos. Ver [Gestión de pedidos](./11-gestion-pedidos.mdx).
+Se pueden ajustar cantidades o quitar productos mientras el pedido **no haya entrado a "Alistamiento"** ("Pendiente por aprobar", "Pendiente" legacy o "Validar disponibilidad"). Aplica a administradores, asesores y a los roles cliente que pueden editar (Creador sobre el suyo, Supervisor en su sede, Administrador de Contrato en la empresa). Ver [Gestión de pedidos](./11-gestion-pedidos.mdx).
+:::
+
+:::tip Asignar repartidor = Alistamiento
+Si asignas un repartidor a un pedido que está en "Validar disponibilidad", el sistema lo pasa automáticamente a "Alistamiento". No hace falta cambiar el estado a mano.
 :::

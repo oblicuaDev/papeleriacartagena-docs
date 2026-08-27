@@ -1,50 +1,66 @@
 ---
 sidebar_position: 4
-title: Administración de categorías
-description: Cómo crear, editar, desactivar y relacionar categorías de productos.
+title: Categorías y subcategorías
+description: Cómo organizar el catálogo en categorías (plan único de cuentas) y subcategorías.
 ---
 
-# Administración de categorías
+# Categorías y subcategorías
 
 **Ruta:** `/admin/centros-de-costos`
 
-Las categorías organizan el catálogo (Papel, Escritura, Aseo, Tecnología...) y sirven como filtro y como base para la importación masiva.
+El catálogo se organiza en **dos niveles**:
 
-## Pantalla principal
+1. **Categorías** (nivel superior): agrupan el catálogo según el plan único de cuentas — **Papelería, Aseo, Cafetería**.
+2. **Subcategorías** (nivel de detalle): "Papel", "Escritura", "Limpieza", "Café e infusiones"... Cada subcategoría pertenece a una categoría, y cada producto se asigna a una subcategoría.
 
-Cuadrícula de tarjetas por categoría, con nombre, descripción, estado (Activa/Inactiva), cantidad de productos y acciones: Editar, Categorías relacionadas, Activar/Desactivar, Eliminar.
+Las subcategorías sirven como filtro del catálogo (en cascada: primero categoría, luego subcategoría) y como base para la importación masiva.
 
-![Captura de pantalla](pathname:///papeleriacartagena-docs/img/categorias_1.png)
-_Vista general de categorías._
+![Vista general de categorías y subcategorías.](pathname:///papeleriacartagena-docs/img/categorias_1.png)
+_Vista general: tarjetas de Categorías arriba, Subcategorías abajo._
 
-## Crear una categoría
+## Categorías
 
-1. Clic en **"+ Nueva Categoría"**.
-2. **Nombre\*** (obligatorio) y **Descripción** (opcional).
-3. Checkbox **"Categoría activa"** (activado por defecto).
-4. Clic en **"Crear Categoría"**.
+En la parte superior de la pantalla, una tarjeta por categoría con: nombre, estado (Activa/Inactiva), número de subcategorías asignadas y acciones: **Editar**, **Asignar subcategorías**, **Activar/Desactivar**, **Eliminar**.
 
-## Editar, activar/desactivar o eliminar
+- **Crear:** botón **"+ Nueva Categoría"** → nombre y estado.
+- **Asignar subcategorías:** ícono de lista de verificación → marcar qué subcategorías pertenecen a esa categoría → **Guardar**.
+- **Eliminar:** solo si no tiene subcategorías asignadas.
 
-- **Editar**: ícono de lápiz → modificar → **Guardar Cambios**.
-- **Activar/Desactivar**: ícono de ojo. Oculta la categoría del catálogo sin borrar nada; es la forma recomendada de "retirarla".
+Las tres categorías del plan único de cuentas (Papelería, Aseo, Cafetería) vienen creadas de fábrica.
+
+## Subcategorías
+
+Debajo, una tarjeta por subcategoría con: nombre, descripción, estado, **categoría a la que pertenece** (etiqueta verde; "Sin categoría" si no está asignada), número de productos y acciones: **Editar**, **Subcategorías relacionadas**, **Activar/Desactivar**, **Eliminar**.
+
+### Crear una subcategoría
+
+1. Botón **"+ Nueva Subcategoría"**.
+2. **Nombre\*** y **Descripción** (opcional).
+3. Checkbox **"activa"** (por defecto sí).
+4. **Crear**.
+5. Para vincularla a una categoría, ve a la tarjeta de la categoría → **"Asignar subcategorías"**.
+
+### Editar, activar/desactivar o eliminar
+
+- **Editar**: ícono de lápiz → modificar → **Guardar**.
+- **Activar/Desactivar**: ícono de ojo. Oculta la subcategoría y sus productos del catálogo del cliente sin borrar nada; es la forma recomendada de "retirarla".
 - **Eliminar**: ícono de papelera → confirmar.
 
 :::warning Restricción
-No se puede eliminar una categoría con productos asociados. Reasigna esos productos a otra categoría antes de eliminarla.
+No se puede eliminar una subcategoría con productos asociados. Reasigna esos productos a otra subcategoría antes de eliminarla.
 :::
 
-## Categorías relacionadas (cross-selling)
+## Subcategorías relacionadas (cross-selling)
 
-Define qué categorías se sugieren al ver productos de otra (por ejemplo, "Impresión" con "Papel" y "Tóner").
+Define qué subcategorías se sugieren al ver productos de otra (por ejemplo, "Impresión" con "Papel" y "Tóner").
 
-1. Ícono de enlace en la tarjeta.
-2. Marcar las categorías relacionadas.
+1. Ícono de enlace en la tarjeta de la subcategoría.
+2. Marcar las subcategorías relacionadas.
 3. Clic en **"Guardar"**.
 
-![Modal de categorías relacionadas.](pathname:///papeleriacartagena-docs/img/categorias_2.png)
-_Modal de categorías relacionadas._
+![Modal de subcategorías relacionadas.](pathname:///papeleriacartagena-docs/img/categorias_2.png)
+_Modal de subcategorías relacionadas._
 
 :::tip Buena práctica
-Relaciona categorías según la lógica real de compra del cliente para mejorar la experiencia y el ticket promedio.
+Relaciona subcategorías según la lógica real de compra del cliente para mejorar la experiencia y el ticket promedio.
 :::

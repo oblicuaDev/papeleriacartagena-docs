@@ -6,33 +6,48 @@ description: Descripción de los roles del sistema y qué puede hacer cada uno.
 
 # Roles y permisos
 
-La plataforma tiene cuatro roles principales. **Cliente** tiene además dos variantes: Creador de pedidos y Supervisor.
+La plataforma tiene cuatro roles principales. El rol **Cliente** tiene además varias variantes (sub-roles) según su nivel de aprobación.
 
 | Rol | Panel | Qué hace |
 |---|---|---|
-| **Administrador** (`admin`) | `/admin` | Control total: catálogo, precios, empresas, usuarios y pedidos. |
-| **Asesor comercial** (`advisor`) | `/asesor` | Gestiona pedidos de sus empresas asignadas. |
-| **Cliente** (`client`) | `/cliente` | Crea pedidos; si es Supervisor, también los aprueba. |
+| **Administrador** (`admin`) | `/admin` | Control total: catálogo, precios, empresas, contratos, usuarios, reportes y **todos** los pedidos. |
+| **Asesor comercial** (`advisor`) | `/asesor` | Gestiona los pedidos de sus empresas asignadas. Con **cobertura total** ("Dirección Comercial"), gestiona los de todos los vendedores. |
+| **Cliente** (`client`) | `/cliente` | Crea pedidos; según su sub-rol, también los aprueba. |
 | **Repartidor** (`delivery`) | `/entregas` | Alista, despacha y entrega pedidos. |
 
 ## Administrador
 
-Acceso total: catálogo, categorías, importaciones masivas, listas de precios, empresas, sedes, usuarios, asesores, todos los pedidos (incluye aprobar, rechazar y revertir), reportes, PDF y dashboard.
+Acceso total: catálogo, categorías y subcategorías, importaciones masivas, listas de precios, empresas, sedes, contratos, usuarios, asesores, todos los pedidos (incluye aprobar, rechazar y revertir), reportes, PDF y dashboard.
 
 ## Asesor comercial
 
 - Ve solo los pedidos de sus empresas asignadas (ver [Asignación de asesores](./10-asignacion-asesores.mdx)).
 - No ve pedidos en "Pendiente por aprobar" ni "Rechazado".
-- Avanza pedidos: Pendiente → Validar disponibilidad → Alistamiento.
+- Avanza pedidos: **Validar disponibilidad → Alistamiento**. Al asignar un repartidor estando en "Validar disponibilidad", el pedido pasa **automáticamente** a "Alistamiento".
+- Puede ajustar cantidades o quitar productos mientras el pedido no haya entrado a "Alistamiento".
 - Comenta y descarga PDF/reportes de sus pedidos. No toca catálogo, precios, empresas ni usuarios.
+
+### Cobertura total — "Dirección Comercial"
+
+Un asesor puede tener activada la casilla **"Cobertura total (Dirección Comercial)"** (ver [Usuarios y roles](./09-usuarios-y-roles.mdx)). Con ella:
+
+- Ve y **trabaja** los pedidos de **todos** los vendedores, no solo los de sus empresas asignadas.
+- Sirve para cubrir a un asesor ausente sin quedar ciego a pedidos pendientes.
+- No se apropia del pedido: el vendedor titular sigue siendo el asignado.
+
+El rol **Administrador** ya tiene esta cobertura de fábrica sobre todos los pedidos.
 
 ## Cliente
 
-**Creador de pedidos**: navega el catálogo y crea pedidos. Si su sede tiene Supervisor, el pedido queda "Pendiente por aprobar"; si no, pasa directo a "Pendiente". Solo ve sus propios pedidos.
+| Sub-rol | Crea pedidos | Aprueba | Alcance |
+|---|---|---|---|
+| **Creador de pedidos** | Sí (quedan "Pendiente por aprobar") | No | Solo sus propios pedidos. |
+| **Supervisor** | Sí (entran directo a "Validar disponibilidad") | Sí | Los pedidos de **su sede**. |
+| **Administrador de Contrato** | Sí (entran directo a "Validar disponibilidad") | Sí | Los pedidos de **todas las sedes** de su empresa. |
+| **Administrador de Empresa** | No | No | Solo lectura: catálogo y reportes de toda la empresa. |
 
-**Supervisor**: mismos permisos, y además aprueba o rechaza pedidos de los creadores de su sede, viendo el histórico completo de la sede.
-
-También existe el **Administrador de empresa** (solo lectura): consulta catálogo y reportes de todas las sedes de su empresa, sin crear ni aprobar pedidos.
+- Un **Creador de pedidos** siempre genera pedidos que quedan pendientes de aprobación. Los aprueba un Supervisor de su sede, un Administrador de Contrato de la empresa o un Administrador del sistema.
+- **Supervisor** y **Administrador de Contrato** se autoaprueban al crear: su pedido entra directo a "Validar disponibilidad".
 
 ## Repartidor
 
@@ -42,13 +57,13 @@ Ve solo sus pedidos asignados, en los estados Alistamiento, En Ruta y Entregado.
 
 | Rol | Transiciones permitidas |
 |---|---|
-| Administrador | Todas las transiciones del flujo. |
-| Asesor comercial | Pendiente → Validar disponibilidad · Validar disponibilidad → Alistamiento |
-| Supervisor (cliente) | Pendiente por aprobar → Validar disponibilidad / Rechazado |
-| Repartidor | Alistamiento → En Ruta · En Ruta → Entregado |
+| Administrador | Todas: incluye "Pendiente por aprobar → Validar disponibilidad / Rechazado", revertir "Rechazado → Pendiente" y "Pendiente (legacy) → Validar disponibilidad". |
+| Asesor comercial | Validar disponibilidad → Alistamiento (y "Pendiente" legacy → Validar disponibilidad). |
+| Supervisor / Administrador de Contrato | Pendiente por aprobar → Validar disponibilidad / Rechazado. |
+| Repartidor | Alistamiento → En Ruta · En Ruta → Entregado. |
 
 Detalle completo en [Estados del flujo de pedidos](./12-estados-flujo-pedidos.mdx).
 
 :::tip Recomendación
-Asigna siempre el rol mínimo necesario. No des el rol Supervisor a quien solo debe crear pedidos.
+Asigna siempre el rol mínimo necesario. No des el rol Supervisor o Administrador de Contrato a quien solo debe crear pedidos, ni la cobertura total a un asesor que solo atiende su cartera.
 :::

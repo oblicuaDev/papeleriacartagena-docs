@@ -1,0 +1,53 @@
+---
+sidebar_position: 8.5
+title: Contratos
+description: Cómo restringir el catálogo de una empresa a un conjunto de SKUs y una vigencia.
+---
+
+# Contratos
+
+**Ruta:** `/admin/contratos`
+
+Un **contrato** limita el catálogo que ve una empresa a un conjunto específico de productos (SKUs) durante una vigencia. Si una empresa tiene un contrato **vigente**, sus usuarios solo ven —y solo pueden pedir— los SKUs incluidos en él. El resto del catálogo queda oculto para esa empresa.
+
+Sirve para acuerdos de suministro cerrados: "esta empresa, en este periodo, solo compra estos 120 productos a estos precios".
+
+## Pantalla principal
+
+Tabla de contratos: empresa, fecha desde, fecha hasta, monto (COP), número de SKUs, estado y acciones (Editar, Eliminar).
+
+**Estados posibles:**
+
+| Etiqueta | Significado |
+|---|---|
+| **Vigente** | Activo y la fecha de hoy está dentro de `[desde, hasta]`. Restringe el catálogo. |
+| **Fuera de fecha** | Activo pero hoy está fuera del rango. No restringe. |
+| **Inactivo** | Desactivado manualmente. No restringe. |
+
+Clic en la etiqueta de estado para activar/desactivar el contrato.
+
+![Captura de pantalla](https://placehold.co/600x400?text=Captura)
+*Listado de contratos por empresa.*
+
+## Crear un contrato
+
+1. Clic en **"Nuevo contrato"**.
+2. **Empresa** (obligatoria).
+3. **Fecha desde** y **Fecha hasta** (obligatorias; "hasta" no puede ser anterior a "desde").
+4. **Monto (COP)**: valor de referencia del contrato.
+5. **SKUs incluidos**: buscar por SKU o nombre y hacer clic para agregar/quitar. Los seleccionados aparecen como etiquetas debajo.
+6. Clic en **"Guardar contrato"**.
+
+## Cómo se aplica la restricción
+
+- Solo cuentan los contratos **vigentes** (activos y en fecha).
+- Si una empresa tiene **varios** contratos vigentes a la vez, se usa la **unión** de todos sus SKUs.
+- La restricción se aplica al **listado del catálogo**, a las **sugerencias de venta cruzada** y a la **creación del pedido**: si un cliente intenta pedir un SKU fuera de su contrato, el sistema rechaza el pedido.
+
+:::warning Antes de activar un contrato
+Verifica que todos los productos que la empresa necesita comprar estén incluidos. Un SKU olvidado desaparece del catálogo de esa empresa mientras el contrato esté vigente.
+:::
+
+## Rol relacionado: Administrador de Contrato
+
+Existe un sub-rol de cliente, **Administrador de Contrato**, que funciona como Supervisor pero a nivel de **toda la empresa** (todas las sedes): ve, aprueba y edita los pedidos de cualquier sede. Se asigna al crear el usuario cliente — ver [Usuarios y roles](./09-usuarios-y-roles.mdx).

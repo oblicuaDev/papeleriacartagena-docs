@@ -52,19 +52,31 @@ Verifica que su rol sea **Supervisor** (no Creador de pedidos) y que pertenezca 
 **No puedo cambiar el rol de un asesor a repartidor.**
 El campo Rol no se puede modificar tras crear el usuario. Crea uno nuevo y desactiva el anterior.
 
+**Un asesor no ve un pedido que debería atender.**
+Cada asesor ve solo los pedidos de sus empresas asignadas. Si necesita ver los de todos (por ejemplo, para cubrir a un compañero), edítalo y marca **"Cobertura total (Dirección Comercial)"**. Ver [Usuarios y roles](./09-usuarios-y-roles.mdx).
+
+**Un cliente no ve productos que antes pedía.**
+Es probable que su empresa tenga un [Contrato](./contratos.mdx) vigente que restringe el catálogo. Agrega el SKU al contrato o desactívalo.
+
 ## Pedidos
 
 **Un pedido quedó "Rechazado" pero ya se corrigió.**
 Solo un Administrador puede devolverlo a "Pendiente". Ver [Estados del flujo](./12-estados-flujo-pedidos.mdx).
 
 **Necesito quitar un producto por falta de stock.**
-Solo es posible en el estado **"Validar disponibilidad"**: edita los ítems e indica el motivo.
+Se puede mientras el pedido **no haya entrado a "Alistamiento"** (estados "Pendiente por aprobar", "Pendiente" o "Validar disponibilidad"): edita los ítems e indica el motivo. Una vez en Alistamiento ya no.
 
-**No encuentro un pedido en el listado.**
-No hay buscador de texto libre; usa el filtro de Estado y revisa la columna Cliente.
+**No encuentro un pedido en el listado de administración.**
+En `/admin/pedidos` no hay buscador de texto libre; usa el filtro de Estado y la columna Cliente. (La vista del **cliente** sí tiene búsqueda por número de pedido.)
 
 **No puedo descargar el reporte de pedidos.**
-Verifica que el navegador no bloquee la descarga y que exista al menos un pedido con el filtro aplicado.
+Verifica que el navegador no bloquee la descarga y que exista al menos un registro con los filtros aplicados. Para reportes a la medida usa `/admin/reportes` (ver [Descarga de órdenes y reportes](./13-descarga-ordenes-reportes.mdx)).
+
+**El generador de reportes dice "Selecciona al menos una columna".**
+En el paso 2 quedaron todas las columnas desmarcadas. Marca al menos una y reintenta.
+
+**Un total no cuadra con Subtotal + IVA.**
+Los precios se cargan **con IVA incluido**; el sistema calcula `Subtotal = Total ÷ 1,19` e `IVA = Total − Subtotal`. Pueden verse diferencias de $1 por redondeo.
 
 ## ¿A quién contactar?
 

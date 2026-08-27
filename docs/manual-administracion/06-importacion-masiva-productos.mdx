@@ -18,7 +18,7 @@ Primera hoja, con fila de encabezados (no distingue mayúsculas/espacios):
 |---|---|---|
 | SKU | `SKU`, `Código`, `Ref`, `Referencia` | Sí |
 | Nombre | `Nombre`, `Name`, `Producto` | Sí |
-| Categoría | `Categoría`, `Category` | Sí (debe existir previamente) |
+| Categoría | `Categoría`, `Category` | Sí — es la **subcategoría** (Papel, Escritura...); debe existir previamente |
 | Descripción | `Descripción`, `Description`, `Desc` | No |
 | Precio Base | `Precio Base`, `Precio`, `Price`, `Valor` | Sí |
 | Stock | `Stock`, `Inventario`, `Cantidad` | No (por defecto 0) |
@@ -27,7 +27,7 @@ Primera hoja, con fila de encabezados (no distingue mayúsculas/espacios):
 Unidades válidas: Unidad, Resma, Caja, Paquete, Pliego, Set, Rollo.
 
 :::warning Antes de importar
-Las categorías del archivo deben existir previamente (ver [Administración de categorías](./04-administracion-categorias.mdx)) y coincidir en nombre con las registradas.
+La columna "Categoría" del archivo corresponde a la **subcategoría** del producto. Debe existir previamente (ver [Categorías y subcategorías](./04-administracion-categorias.mdx)) y coincidir en nombre con las registradas. El precio va **con IVA incluido**.
 :::
 
 ## Pasos: Cargar → Previsualizar → Importar

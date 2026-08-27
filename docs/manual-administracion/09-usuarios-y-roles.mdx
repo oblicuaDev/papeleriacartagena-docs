@@ -12,7 +12,18 @@ Dos tipos de gestión: **clientes** (usuarios de las empresas compradoras) y **p
 
 **Ruta:** `/admin/clientes`
 
-Tabla con nombre, email, empresa/sede, rol (Supervisor o Creador), contacto, lista de precios efectiva, dirección y fecha de creación.
+Tabla con nombre, email, empresa/sede, rol, contacto, lista de precios efectiva, dirección y fecha de creación.
+
+### Sub-roles de cliente
+
+| Rol | Crea pedidos | Aprueba | Alcance |
+|---|---|---|---|
+| **Creador de pedidos** | Sí → quedan "Pendiente por aprobar" | No | Sus propios pedidos. |
+| **Supervisor** | Sí → entran directo a "Validar disponibilidad" | Sí | Los pedidos de **su sede**. |
+| **Administrador de Contrato** | Sí → entran directo a "Validar disponibilidad" | Sí | Los pedidos de **todas las sedes** de la empresa. |
+| **Administrador de Empresa** | No | No | Solo lectura de catálogo y reportes de toda la empresa. |
+
+Los tres primeros se asignan desde el formulario de creación. El *Administrador de Empresa* se gestiona con el equipo técnico.
 
 ![Vista general de clientes.](pathname:///papeleriacartagena-docs/img/usuarios_1.png)
 *Vista general de clientes.*
@@ -25,15 +36,15 @@ Tabla con nombre, email, empresa/sede, rol (Supervisor o Creador), contacto, lis
 4. Nombre contacto (opcional).
 5. **Email*** y **Contraseña*** iniciales.
 6. Teléfono y Dirección (opcionales).
-7. **Rol del usuario***: **Creador de pedidos** (crea, queda pendiente de aprobación) o **Supervisor** (crea y además aprueba/rechaza).
+7. **Rol del usuario***: **Creador de pedidos**, **Supervisor** o **Administrador de Contrato** (ver tabla arriba). Un texto de ayuda describe el rol elegido.
 8. Clic en **"Crear Cliente"**.
 
 :::info
 La lista de precios se hereda automáticamente (sede o empresa); no se configura aquí. Ver [Listas de precios](./07-listas-de-precios.mdx).
 :::
 
-:::warning Rol Supervisor
-Puede aprobar o rechazar pedidos de **todos** los creadores de su misma sede, no solo los propios. Asígnalo con criterio.
+:::warning Roles con aprobación
+El **Supervisor** aprueba/rechaza pedidos de **todos** los creadores de su sede; el **Administrador de Contrato** hace lo mismo en **todas las sedes** de la empresa. Asígnalos con criterio.
 :::
 
 ## Personal interno (asesores y repartidores)
@@ -53,7 +64,18 @@ Dos pestañas: **👤 Asesores** y **🚚 Repartidores**, cada una con nombre, e
 4. Sede (opcional).
 5. Iniciales del avatar (opcional; se generan solas si se deja vacío).
 6. Checkbox **"Usuario activo"**.
-7. Clic en **"Crear"**.
+7. Solo para asesores: checkbox **"Cobertura total (Dirección Comercial)"** — ver abajo.
+8. Clic en **"Crear"**.
+
+### Cobertura total — "Dirección Comercial"
+
+Al crear o editar un **asesor** aparece la casilla **"Cobertura total (Dirección Comercial)"**. Cuando está marcada, ese asesor:
+
+- Ve y **trabaja** los pedidos de **todos** los vendedores (no solo los de sus empresas asignadas).
+- En su panel `/asesor` aparece la columna **"Vendedor"** y un filtro por vendedor.
+- Es útil para dirección comercial o para cubrir a un asesor ausente.
+
+En la tabla de asesores, los que la tienen muestran una etiqueta **"Cobertura total"**. Los que no, siguen viendo solo su cartera. El rol **Administrador** ya cubre todos los pedidos sin necesidad de esta casilla.
 
 ### Editar, desactivar o eliminar
 

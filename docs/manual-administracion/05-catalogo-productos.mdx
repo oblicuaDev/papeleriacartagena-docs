@@ -12,7 +12,7 @@ description: Cómo crear, editar, buscar y desactivar productos del catálogo.
 
 - Título con el total de productos registrados.
 - Botones **"Importar Excel"** (ver [Importación masiva](./06-importacion-masiva-productos.mdx)) y **"+ Nuevo Producto"**.
-- Filtros: búsqueda por nombre/SKU, categoría y estado.
+- Filtros: búsqueda por nombre/SKU, **categoría** (Papelería / Aseo / Cafetería) **→ subcategoría** (en cascada) y estado.
 - Tabla de productos.
 
 ![Vista general del catálogo con filtros.](pathname:///papeleriacartagena-docs/img/catalogo_1.png)
@@ -25,8 +25,8 @@ description: Cómo crear, editar, buscar y desactivar productos del catálogo.
 | Imagen | Miniatura del producto (imagen por defecto si no tiene). |
 | SKU | Código único. |
 | Nombre | Nombre y descripción resumida. |
-| Categoría | Categoría asignada. |
-| Precio Base | En pesos colombianos (COP). |
+| Categoría | La **subcategoría** asignada al producto (en esta pantalla la columna se rotula "Categoría"). |
+| Precio Base | En pesos colombianos (COP), **con IVA incluido** (ver nota abajo). |
 | Stock | Unidades disponibles. |
 | Unidad | Unidad, Resma, Caja, Paquete, Pliego, Set o Rollo. |
 | Estado | Activo / Inactivo. |
@@ -39,7 +39,7 @@ Con más de 50 productos, la tabla se pagina (ej. "Mostrando 1–50 de 250").
 1. Clic en **"+ Nuevo Producto"**.
 2. Imagen (opcional).
 3. **Nombre*** y **SKU***.
-4. **Categoría*** (solo aparecen las activas).
+4. **Categoría*** — el desplegable lista las **subcategorías** activas (Papel, Escritura, Limpieza...). El producto hereda la categoría del plan de cuentas (Papelería / Aseo / Cafetería) a través de la subcategoría elegida.
 5. Descripción (opcional).
 6. **Precio Base (COP)***, Stock (por defecto 0) y Unidad.
 7. Opcional: productos complementarios (cross-selling).
@@ -47,6 +47,10 @@ Con más de 50 productos, la tabla se pagina (ej. "Mostrando 1–50 de 250").
 9. Clic en **"Crear Producto"**.
 
 Si ocurre un error al guardar (por ejemplo, SKU duplicado), aparece en un recuadro rojo arriba del formulario.
+
+:::info Precio con IVA incluido
+El **Precio Base** se registra **con IVA incluido** (las listas de precios se cargan igual). En el catálogo, el pedido, los PDF y los reportes el sistema muestra el desglose calculado: `Subtotal = Total ÷ 1,19`, `IVA (19%) = Total − Subtotal`. No hay que capturar el IVA por separado.
+:::
 
 ## Editar, activar/desactivar o eliminar
 
@@ -60,4 +64,4 @@ Prefiere **desactivar** sobre eliminar productos con pedidos históricos, para c
 
 ## Buscar y filtrar
 
-Combina búsqueda (nombre/SKU), categoría y estado para acotar los resultados a los productos activos o inactivos.
+Combina búsqueda (nombre/SKU), categoría, subcategoría y estado para acotar los resultados. El filtro de subcategoría solo muestra las que pertenecen a la categoría seleccionada.

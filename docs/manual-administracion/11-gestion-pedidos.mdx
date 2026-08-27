@@ -11,7 +11,7 @@ description: Cómo consultar, editar y dar seguimiento a los pedidos desde el pa
 ## Listado
 
 - Total de pedidos y filtro por **Estado**.
-- Botones **CSV** / **Excel** (ver [Descarga de reportes](./13-descarga-ordenes-reportes.mdx)).
+- Botones **CSV** / **Excel** para exportar la lista (ver [Descarga de reportes](./13-descarga-ordenes-reportes.mdx)). Para reportes a la medida, usa el [generador de reportes](./13-descarga-ordenes-reportes.mdx).
 - Tabla: número, cliente, asesor, fecha, monto, estado y botón **"Gestionar"**.
 
 ![Vista de "Trabajar Pedidos".](pathname:///papeleriacartagena-docs/img/pedidos_1.png)
@@ -19,11 +19,13 @@ description: Cómo consultar, editar y dar seguimiento a los pedidos desde el pa
 
 ## Detalle de un pedido (`/admin/pedidos/{id}`)
 
-**Información general:** ID, cliente, empresa, sede, fecha, asesor, repartidor, estado, total, notas, transportista, dirección y teléfono.
+**Información general:** ID, cliente, empresa, sede, fecha, asesor, repartidor, estado, notas, transportista, dirección y teléfono. Los montos se muestran discriminados: **Subtotal · IVA (19%) · Total**.
 
 **Cambio de estado:** desplegable con los estados posibles según el rol del usuario, motivo opcional y botón **"Guardar estado"** (ver [Estados del flujo](./12-estados-flujo-pedidos.mdx)).
 
-**Ítems del pedido:** tabla de SKU, cantidad, unidad, precio y total. En **"Validar disponibilidad"** se pueden ajustar cantidades o quitar productos (con motivo), quedando registrado en el historial.
+**Ítems del pedido:** tabla de SKU, cantidad, unidad, precio y total. Las cantidades se pueden **escribir directamente** además de usar los botones + / –. Se pueden ajustar cantidades o quitar productos (con motivo) mientras el pedido **no haya entrado a "Alistamiento"** — es decir, en "Pendiente por aprobar", "Pendiente" (legacy) o "Validar disponibilidad". Cada cambio queda registrado en el historial.
+
+**Descargas:** botones **"Orden de compra PDF"** y **"Plantilla Excel"** del pedido (con membrete de Papelería Cartagena). El cliente tiene además su propia descarga sin membrete — ver [Descarga de órdenes y reportes](./13-descarga-ordenes-reportes.mdx).
 
 **Comentarios internos:** notas visibles solo para el equipo, con usuario, rol y fecha. No se pueden eliminar (auditoría).
 

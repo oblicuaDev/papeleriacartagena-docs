@@ -10,6 +10,10 @@ Una lista de precios fija un precio por producto para un grupo de empresas, sin 
 
 **Ruta:** `/admin/listas-precios`
 
+:::info Precios con IVA incluido
+Todos los precios de la lista se cargan **con IVA incluido**, igual que el precio base del catálogo. En el catálogo del cliente, el checkout, el detalle del pedido, los PDF y los reportes el sistema muestra el desglose: `Subtotal = Total ÷ 1,19` · `IVA (19%) = Total − Subtotal`.
+:::
+
 ## Pantalla principal
 
 Tarjetas por lista, con nombre, descripción, productos con precio, empresas asignadas y los botones **"$ Precios"**, **"🏢 Empresas"**, Editar y Eliminar.
@@ -29,7 +33,7 @@ La lista nace vacía: todos los productos usan el precio base hasta que se defin
 
 1. Clic en **"$ Precios"** en la tarjeta.
 2. Buscar el producto por nombre o SKU.
-3. Escribir el **Precio en lista** (vacío o cero = usa el precio base).
+3. Escribir el **Precio en lista**, con IVA incluido (vacío o cero = usa el precio base).
 4. Clic en **"Guardar precios"**.
 
 ![Modal de precios de la lista.](pathname:///papeleriacartagena-docs/img/precios_2.png)

@@ -1,12 +1,36 @@
 ---
 sidebar_position: 13
 title: Descarga de órdenes de compra y reportes
-description: Cómo exportar reportes de pedidos y descargar órdenes de compra en PDF.
+description: Cómo generar reportes a la medida, exportar listas de pedidos y descargar órdenes de compra en PDF.
 ---
 
 # Descarga de órdenes de compra y reportes
 
-## Exportar pedidos (CSV / Excel)
+## Generador dinámico de reportes
+
+**Ubicación:** `/admin/reportes` (solo Administrador).
+
+En lugar de una lista fija de reportes, el administrador **arma** el reporte en cuatro pasos:
+
+1. **¿Qué exportar?** — elegir el conjunto de datos:
+   - **Pedidos** — una fila por pedido.
+   - **Ítems de pedido** — una fila por producto pedido (para analizar consumo por producto/subcategoría).
+   - **Productos** — el catálogo.
+   - **Usuarios** — clientes, asesores y repartidores.
+2. **Columnas** — marcar qué columnas incluir (todas vienen marcadas; botones "Todas" / "Ninguna").
+3. **Filtros y rango** — **Desde / Hasta** más los filtros propios del conjunto elegido (estado, asesor, empresa, sucursal, categoría, rol, activo...).
+4. **Registros y formato** — número máximo de filas (1–50 000, por defecto 1 000) y formato **XLSX** o **CSV**. Se muestra un estimado "≈ N registros con estos filtros".
+
+Clic en **"Generar reporte"** descarga `reporte_<tipo>_<fecha>.<xlsx|csv>`.
+
+![Captura de pantalla](https://placehold.co/600x400?text=Captura)
+*Generador dinámico de reportes: pasos de dataset, columnas, filtros y formato.*
+
+:::tip Uso recomendado
+Usa **Ítems de pedido** para cruzar consumo por producto o subcategoría; **Pedidos** para totales por estado, asesor o periodo. **XLSX** para analizar, **CSV** para cargar en otro sistema (abre con acentos correctos).
+:::
+
+## Exportar la lista de pedidos (CSV / Excel)
 
 **Ubicación:** `/admin/pedidos`, botones **CSV** y **Excel**.
 
@@ -14,20 +38,25 @@ description: Cómo exportar reportes de pedidos y descargar órdenes de compra e
 2. Clic en **CSV** o **Excel**.
 3. Se descarga `pedidos_{fecha}.csv` o `.xlsx`.
 
-![Botones "CSV" y "Excel".](pathname:///papeleriacartagena-docs/img/reportes_1.png)
-*Botones "CSV" y "Excel".*
+El archivo incluye, por pedido: ID, cliente, empresa, asesor, fecha, **Subtotal, IVA, Total**, estado e ítems.
 
-El archivo incluye, por pedido: ID, cliente, empresa, asesor, fecha, total, estado e ítems (SKU, cantidad, precio y total de cada línea).
-
-:::tip Uso recomendado
-Usa **Excel** para analizar o cruzar datos (ej. con contabilidad); **CSV** para cargarlos en otro sistema.
-:::
-
-## Orden de compra en PDF
+## Orden de compra en PDF (uso interno)
 
 1. Ir a `/admin/pedidos` y abrir el pedido.
-2. Clic en el botón de **descarga de PDF**.
-3. Se descarga el documento: membrete, número, fecha, cliente, ítems, totales, observaciones y transportista.
+2. Clic en **"Orden de compra PDF"**.
+3. Se genera el documento con **membrete de Papelería Cartagena**: número, fecha, cliente, ítems, y las filas **Subtotal / IVA (19%) / TOTAL PEDIDO**, observaciones y transportista.
+
+También está el botón **"Plantilla Excel"**, con el mismo contenido y membrete.
+
+## Descarga del pedido por el cliente (sin membrete)
+
+Desde su propia vista de detalle de pedido, el **cliente** tiene los botones **"Descargar pedido en PDF"** y **"Descargar pedido en EXCEL"**. Estos documentos:
+
+- **No llevan logo ni la marca "Papelería Cartagena"** (encabezado neutro "PEDIDO").
+- Mantienen el desglose **Subtotal / IVA / Total** y la tabla de ítems.
+- Están disponibles en **cualquier estado** del pedido.
+
+Los botones internos de administración (**Orden de compra PDF** / **Plantilla Excel**) siguen igual, con membrete.
 
 ## Adjuntos
 

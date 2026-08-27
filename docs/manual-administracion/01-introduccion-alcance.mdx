@@ -16,24 +16,26 @@ Este manual **no cubre** la vista del cliente comprador (catálogo, carrito, ped
 
 Sistema B2B de proveeduría para pedidos de papelería y suministros de oficina. Las empresas cliente (con una o varias sedes) hacen pedidos recurrentes con precios propios, aprobación interna y seguimiento hasta la entrega.
 
-| Rol                  | Panel       | Función                                     |
-| -------------------- | ----------- | ------------------------------------------- |
-| **Administrador**    | `/admin`    | Configura todo y supervisa la operación.    |
-| **Asesor comercial** | `/asesor`   | Gestiona pedidos de sus empresas asignadas. |
-| **Cliente**          | `/cliente`  | Crea y, si aplica, aprueba pedidos.         |
-| **Repartidor**       | `/entregas` | Alista, despacha y entrega pedidos.         |
+| Rol                  | Panel       | Función                                             |
+| -------------------- | ----------- | -------------------------------------------------- |
+| **Administrador**    | `/admin`    | Configura todo y supervisa la operación.           |
+| **Asesor comercial** | `/asesor`   | Gestiona pedidos de sus empresas asignadas (o de todos los vendedores, si tiene *cobertura total*). |
+| **Cliente**          | `/cliente`  | Crea y, según su rol, aprueba pedidos.             |
+| **Repartidor**       | `/entregas` | Alista, despacha y entrega pedidos.                |
 
 Este manual cubre el **panel de Administrador**.
 
 ## Qué se puede hacer desde Administración
 
-- Catálogo de productos y categorías (+ cargas masivas por Excel/CSV).
-- Listas de precios por empresa.
+- Catálogo de productos, **categorías y subcategorías** (+ cargas masivas por Excel/CSV).
+- Listas de precios por empresa (**los precios se cargan con IVA incluido**; el sistema discrimina Subtotal / IVA / Total).
 - Empresas y sedes (presupuestos, overrides).
-- Usuarios: clientes, asesores, repartidores.
-- Asignación de asesores comerciales.
-- Seguimiento de pedidos en todos sus estados.
-- Reportes (CSV/Excel) y órdenes de compra en PDF.
+- **Contratos**: catálogo restringido a un conjunto de SKUs por empresa y vigencia.
+- Usuarios: clientes (con roles de aprobación), asesores y repartidores.
+- Asignación de asesores comerciales y **cobertura total ("Dirección Comercial")**.
+- Seguimiento de pedidos en todos sus estados, con Subtotal / IVA / Total.
+- **Generador dinámico de reportes** (`/admin/reportes`) y exportaciones CSV/Excel.
+- Órdenes de compra en PDF.
 - Dashboard con indicadores de la operación.
 
 ## Cómo leer este manual
