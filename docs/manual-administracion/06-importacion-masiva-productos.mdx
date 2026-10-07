@@ -27,7 +27,7 @@ Primera hoja, con fila de encabezados (no distingue mayúsculas/espacios):
 
 Unidades válidas: Unidad, Resma, Caja, Paquete, Pliego, Set, Rollo.
 
-:::warning Antes de importar
+:::warning[Antes de importar]
 La columna "Categoría" del archivo corresponde a la **subcategoría** del producto. Debe existir previamente (ver [Categorías y subcategorías](./04-administracion-categorias.mdx)) y coincidir en nombre con las registradas. El precio va **con IVA incluido**.
 :::
 
@@ -58,6 +58,6 @@ La columna "Categoría" del archivo corresponde a la **subcategoría** del produ
 | "Precio base inválido" | Valor no numérico o vacío. | Usar solo números ($ y separadores se limpian automáticamente). |
 | Error "API: `{motivo}`" | El servidor rechazó el producto (ej. SKU duplicado). | Corregir el dato y reintentar esa fila. |
 
-:::tip Buena práctica
+:::tip[Buena práctica]
 Para catálogos grandes, divide la importación en lotes de unos cientos de productos y revisa cada previsualización antes de confirmar.
 :::

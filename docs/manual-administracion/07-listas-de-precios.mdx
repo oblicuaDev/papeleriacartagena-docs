@@ -10,7 +10,7 @@ Una lista de precios fija un precio por producto para un grupo de empresas, sin 
 
 **Ruta:** `/admin/listas-precios`
 
-:::info Precios con IVA incluido
+:::info[Precios con IVA incluido]
 Todos los precios de la lista se cargan **con IVA incluido**, igual que el precio base del catálogo. En el catálogo del cliente, el checkout, el detalle del pedido, los PDF y los reportes el sistema muestra el desglose según la tasa de IVA de cada producto (0%, 5% o 19%): `Subtotal = Total ÷ (1 + tasa)` · `IVA = Total − Subtotal`.
 :::
 
@@ -49,7 +49,7 @@ Solo es necesario definir precio para los productos con condición comercial dis
 2. Marcar las empresas que usarán esta lista.
 3. Clic en **"Guardar asignaciones"**.
 
-:::warning Una lista por empresa
+:::warning[Una lista por empresa]
 Una empresa solo puede tener **una lista a la vez**; asignar otra reemplaza la anterior. Sedes y usuarios sí pueden tener su propio override (ver [Empresas y sedes](./08-empresas-y-sedes.mdx)).
 :::
 
@@ -58,6 +58,6 @@ Una empresa solo puede tener **una lista a la vez**; asignar otra reemplaza la a
 - **Editar**: cambia nombre o descripción (los precios se editan en "$ Precios").
 - **Eliminar**: las empresas asignadas vuelven al precio base.
 
-:::tip Buena práctica
+:::tip[Buena práctica]
 Nombra las listas con el cliente y su vigencia para identificarlas fácilmente entre varias decenas activas.
 :::
