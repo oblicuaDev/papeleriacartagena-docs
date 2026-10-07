@@ -8,16 +8,17 @@ description: Cómo generar reportes a la medida, exportar listas de pedidos y de
 
 ## Generador dinámico de reportes
 
-**Ubicación:** `/admin/reportes` (solo Administrador).
+**Ubicación:** `/admin/reportes` (Administrador, con alcance total). El **Administrador de Empresa** y el **Administrador de Contrato** (clientes) tienen el mismo generador en `/cliente/reportes`, limitado a **su empresa** y a los conjuntos **Pedidos** e **Ítems de pedido**.
 
 En lugar de una lista fija de reportes, el administrador **arma** el reporte en cuatro pasos:
 
 1. **¿Qué exportar?** — elegir el conjunto de datos:
    - **Pedidos** — una fila por pedido.
    - **Ítems de pedido** — una fila por producto pedido (para analizar consumo por producto/subcategoría).
-   - **Productos** — el catálogo.
-   - **Usuarios** — clientes, asesores y repartidores.
+   - **Productos** — el catálogo (incluye una columna por lista de precios). Solo Administrador.
+   - **Usuarios** — clientes, asesores y repartidores. Solo Administrador.
 2. **Columnas** — marcar qué columnas incluir (todas vienen marcadas; botones "Todas" / "Ninguna").
+   > Para los clientes, las columnas internas del pedido (**asesor, repartidor y transportista**) no se muestran ni se exportan, y no ven el filtro de empresa ni de asesor.
 3. **Filtros y rango** — **Desde / Hasta** más los filtros propios del conjunto elegido (estado, asesor, empresa, sucursal, categoría, rol, activo...).
 4. **Registros y formato** — número máximo de filas (1–50 000, por defecto 1 000) y formato **XLSX** o **CSV**. Se muestra un estimado "≈ N registros con estos filtros".
 

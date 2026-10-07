@@ -1,0 +1,59 @@
+---
+sidebar_position: 16
+title: Reclamos sobre pedidos
+description: Cómo se registran, gestionan, devuelven y cierran los reclamos sobre pedidos aprobados.
+---
+
+# Reclamos sobre pedidos
+
+**Rutas:** `/admin/reclamos` (Administrador) · `/asesor/reclamos` (Asesor) · `/cliente/reclamos` ("Mis reclamos", cliente)
+
+Un **reclamo** es una solicitud del cliente asociada a un pedido: producto que no llegó, producto averiado, devolución, queja sobre el servicio o una felicitación. Cada reclamo recibe un número `REC-00001`, `REC-00002`...
+
+## Quién puede qué
+
+| Rol | Qué puede hacer |
+|---|---|
+| **Cliente** (Creador, Supervisor, Administrador de Contrato) | Crea reclamos sobre pedidos aprobados y consulta "Mis reclamos" dentro del alcance de pedidos que ya ve. |
+| **Administrador de Empresa** | Solo lectura; **no** crea reclamos. |
+| **Administrador / Asesor** | Gestionan: agregan notas públicas, registran la devolución y cierran el reclamo. |
+
+:::info Alcance
+Cada rol ve los reclamos de los pedidos que ya puede ver (el Supervisor, los de su sede; el Administrador de Contrato, los de toda la empresa; el Asesor, los de sus empresas o todos si tiene cobertura total).
+:::
+
+## Crear un reclamo (cliente)
+
+1. Abrir el detalle del pedido y usar el panel **Reclamos** → crear reclamo.
+2. Elegir el **motivo**:
+   - No me llegó producto
+   - Producto averiado
+   - Devolución de producto
+   - Reclamo sobre el servicio prestado
+   - Valoración o felicitación sobre el servicio prestado
+3. Escribir la descripción en el editor de texto enriquecido (negrita, cursiva, listas...).
+4. Adjuntar hasta **5 archivos** (fotos JPG/PNG/WEBP o PDF, máx. **10 MB** cada uno).
+
+Solo se puede reclamar sobre pedidos **aprobados y no devueltos**. Un pedido "Pendiente por aprobar", "Rechazado" o "Devuelto" no admite reclamos.
+
+Al crear un reclamo, el pedido pasa a **"En reclamación"**. Una **felicitación** se registra directamente como cerrada y no cambia el estado del pedido.
+
+## Gestionar un reclamo (Administrador / Asesor)
+
+Desde el panel **Reclamos** del detalle del pedido, o desde el listado de reclamos (los abiertos aparecen primero):
+
+- **Nota pública:** mensaje visible para el cliente, queda en el historial del reclamo.
+- **Devolución:** marca el pedido como **"Devuelto"**. La devolución **no cierra** el reclamo; se cierra aparte.
+- **Cierre:** cierra el reclamo, con un adjunto opcional como soporte de la resolución.
+
+Cuando se cierra el **último reclamo abierto** del pedido, este vuelve al estado en que estaba antes de la reclamación (salvo que esté "Devuelto").
+
+## Efectos en otros módulos
+
+- Los pedidos **"Devuelto"** quedan **fuera de los consolidados y del presupuesto** de los dashboards.
+- Los reportes incluyen los nuevos estados "En reclamación" y "Devuelto" como filtro.
+- Los adjuntos **iniciales** del cliente se eliminan automáticamente a los **60 días**; los adjuntos de cierre se conservan.
+
+:::warning Puesta en producción
+Las tablas de reclamos (`claims`, `claim_attachments`, `claim_events`) y los nuevos estados de pedido se crean con `infra/migrate.sql`. Ese script debe ejecutarse en el servidor antes de usar el módulo.
+:::

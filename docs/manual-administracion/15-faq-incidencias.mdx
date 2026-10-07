@@ -47,7 +47,7 @@ Verifica que el precio esté guardado en esa lista y que la empresa/sede esté a
 Ni la sede ni la empresa tienen asesor configurado. Asígnalo en [Empresas y sedes](./08-empresas-y-sedes.mdx) o directamente en el detalle del pedido.
 
 **Un cliente no puede aprobar pedidos.**
-Verifica que su rol sea **Supervisor** (no Creador de pedidos) y que pertenezca a la misma sede. Ver [Usuarios y roles](./09-usuarios-y-roles.mdx).
+Verifica que su rol sea **Supervisor** o **Administrador de Contrato** (no Creador de pedidos) y que, si es Supervisor, pertenezca a la misma sede del pedido. Ver [Usuarios y roles](./09-usuarios-y-roles.mdx).
 
 **No puedo cambiar el rol de un asesor a repartidor.**
 El campo Rol no se puede modificar tras crear el usuario. Crea uno nuevo y desactiva el anterior.
@@ -64,7 +64,16 @@ Es probable que su empresa tenga un [Contrato](./contratos.mdx) vigente que rest
 Solo un Administrador puede devolverlo a "Pendiente". Ver [Estados del flujo](./12-estados-flujo-pedidos.mdx).
 
 **Necesito quitar un producto por falta de stock.**
-Se puede mientras el pedido **no haya entrado a "Alistamiento"** (estados "Pendiente por aprobar", "Pendiente" o "Validar disponibilidad"): edita los ítems e indica el motivo. Una vez en Alistamiento ya no.
+Solo se puede mientras el pedido está **"Pendiente por aprobar"** (o "Pendiente" legacy): edita los ítems e indica el motivo. Una vez aprobado el pedido queda cerrado y nadie lo edita; si hace falta, recházalo para que el cliente cree uno nuevo.
+
+**Un Creador de pedidos no ve su pedido recién enviado.**
+Debe buscarlo en la pestaña **"Pendientes por aprobar"** de su listado; hasta que lo aprueben no aparece en "Todos".
+
+**Un Supervisor no ve empresas, sedes o usuarios de otras sedes.**
+Es intencional: el Supervisor solo ve y gestiona su propia sede, y solo usuarios Creador de pedidos. Para más alcance, usa el rol Administrador de Contrato.
+
+**El carrito desapareció tras cerrar sesión.**
+El carrito se conserva como borrador en el navegador y se recupera al volver a entrar con la **misma cuenta**. Si se entra con otra cuenta en ese navegador, el borrador se descarta.
 
 **No encuentro un pedido en el listado de administración.**
 En `/admin/pedidos` no hay buscador de texto libre; usa el filtro de Estado y la columna Cliente. (La vista del **cliente** sí tiene búsqueda por número de pedido.)
@@ -76,7 +85,15 @@ Verifica que el navegador no bloquee la descarga y que exista al menos un regist
 En el paso 2 quedaron todas las columnas desmarcadas. Marca al menos una y reintenta.
 
 **Un total no cuadra con Subtotal + IVA.**
-Los precios se cargan **con IVA incluido**; el sistema calcula `Subtotal = Total ÷ 1,19` e `IVA = Total − Subtotal`. Pueden verse diferencias de $1 por redondeo.
+Los precios se cargan **con IVA incluido**; el sistema calcula `Subtotal = Total ÷ (1 + tasa)` e `IVA = Total − Subtotal`, con la tasa de cada producto (0%, 5% o 19%). Pueden verse diferencias de $1 por redondeo.
+
+## Reclamos
+
+**No puedo crear un reclamo sobre un pedido.**
+Solo se reclama sobre pedidos **aprobados y no devueltos**, y el Administrador de Empresa no crea reclamos. Ver [Reclamos](./16-reclamos.mdx).
+
+**El pedido quedó "En reclamación" y ya se resolvió.**
+Cierra el reclamo (con adjunto opcional); si no quedan reclamos abiertos, el pedido vuelve a su estado anterior.
 
 ## ¿A quién contactar?
 

@@ -41,7 +41,7 @@ Con más de 50 productos, la tabla se pagina (ej. "Mostrando 1–50 de 250").
 3. **Nombre*** y **SKU***.
 4. **Categoría*** — el desplegable lista las **subcategorías** activas (Papel, Escritura, Limpieza...). El producto hereda la categoría del plan de cuentas (Papelería / Aseo / Cafetería) a través de la subcategoría elegida.
 5. Descripción (opcional).
-6. **Precio Base (COP)***, Stock (por defecto 0) y Unidad.
+6. **Precio Base (COP)***, Stock (por defecto 0), Unidad e **IVA** (0% exento, 5% o 19%; por defecto 19%).
 7. Opcional: productos complementarios (cross-selling).
 8. Checkbox **"Producto activo"**; marcar **"No hace parte del catálogo"** si es de uso interno.
 9. Clic en **"Crear Producto"**.
@@ -49,7 +49,7 @@ Con más de 50 productos, la tabla se pagina (ej. "Mostrando 1–50 de 250").
 Si ocurre un error al guardar (por ejemplo, SKU duplicado), aparece en un recuadro rojo arriba del formulario.
 
 :::info Precio con IVA incluido
-El **Precio Base** se registra **con IVA incluido** (las listas de precios se cargan igual). En el catálogo, el pedido, los PDF y los reportes el sistema muestra el desglose calculado: `Subtotal = Total ÷ 1,19`, `IVA (19%) = Total − Subtotal`. No hay que capturar el IVA por separado.
+El **Precio Base** se registra **con IVA incluido** (las listas de precios se cargan igual). En el catálogo, el pedido, los PDF y los reportes el sistema muestra el desglose calculado según la **tasa de IVA de cada producto** (0%, 5% o 19%): `Subtotal = Total ÷ (1 + tasa)`, `IVA = Total − Subtotal`. Solo hay que elegir la tasa del producto; esta se guarda en cada línea del pedido, así que cambiarla después no altera pedidos ya creados.
 :::
 
 ## Editar, activar/desactivar o eliminar

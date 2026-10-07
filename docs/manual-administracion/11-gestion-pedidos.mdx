@@ -19,13 +19,15 @@ description: Cómo consultar, editar y dar seguimiento a los pedidos desde el pa
 
 ## Detalle de un pedido (`/admin/pedidos/{id}`)
 
-**Información general:** ID, cliente, empresa, sede, fecha, asesor, repartidor, estado, notas, transportista, dirección y teléfono. Los montos se muestran discriminados: **Subtotal · IVA (19%) · Total**.
+**Información general:** ID, cliente, empresa, sede, fecha, asesor, repartidor, estado, notas, transportista, dirección y teléfono. Los montos se muestran discriminados: **Subtotal · Base exenta · IVA 5% · IVA 19% · Total**, según la tasa de IVA de cada producto (ver [Catálogo](./05-catalogo-productos.mdx)).
 
 **Cambio de estado:** desplegable con los estados posibles según el rol del usuario, motivo opcional y botón **"Guardar estado"** (ver [Estados del flujo](./12-estados-flujo-pedidos.mdx)).
 
-**Ítems del pedido:** tabla de SKU, cantidad, unidad, precio y total. Las cantidades se pueden **escribir directamente** además de usar los botones + / –. Se pueden ajustar cantidades o quitar productos (con motivo) mientras el pedido **no haya entrado a "Alistamiento"** — es decir, en "Pendiente por aprobar", "Pendiente" (legacy) o "Validar disponibilidad". Cada cambio queda registrado en el historial.
+**Ítems del pedido:** tabla de SKU, cantidad, unidad, precio y total. Las cantidades se pueden **escribir directamente** además de usar los botones + / –. La tabla incluye la columna **IVA %** de cada línea. Se pueden ajustar cantidades o quitar productos (con motivo) **solo mientras el pedido está "Pendiente por aprobar"** (botón **"Modificar pedido"**). Una vez aprobado queda cerrado y no se edita. Cada cambio queda registrado en el historial.
 
 **Descargas:** botones **"Orden de compra PDF"** y **"Plantilla Excel"** del pedido (con membrete de Papelería Cartagena). El cliente tiene además su propia descarga sin membrete — ver [Descarga de órdenes y reportes](./13-descarga-ordenes-reportes.mdx).
+
+**Reclamos:** panel con los reclamos del pedido, desde donde se registran notas públicas, la devolución y el cierre (ver [Reclamos](./16-reclamos.mdx)).
 
 **Comentarios internos:** notas visibles solo para el equipo, con usuario, rol y fecha. No se pueden eliminar (auditoría).
 
@@ -39,5 +41,5 @@ description: Cómo consultar, editar y dar seguimiento a los pedidos desde el pa
 Filtrar por **Estado** y revisar la columna **Cliente** (no hay buscador de texto libre).
 
 :::tip Rutina recomendada
-Revisar a diario los pedidos en **Pendiente** y **Validar disponibilidad**.
+Revisar a diario los pedidos en **Pendiente por aprobar** y **Validar disponibilidad**, y los **reclamos abiertos**.
 :::

@@ -19,8 +19,8 @@ Tabla con nombre, email, empresa/sede, rol, contacto, lista de precios efectiva,
 | Rol | Crea pedidos | Aprueba | Alcance |
 |---|---|---|---|
 | **Creador de pedidos** | Sí → quedan "Pendiente por aprobar" | No | Sus propios pedidos. |
-| **Supervisor** | Sí → entran directo a "Validar disponibilidad" | Sí | Los pedidos de **su sede**. |
-| **Administrador de Contrato** | Sí → entran directo a "Validar disponibilidad" | Sí | Los pedidos de **todas las sedes** de la empresa. |
+| **Supervisor** | Sí → quedan "Pendiente por aprobar" | Sí | Los pedidos de **su sede**. |
+| **Administrador de Contrato** | Sí → quedan "Pendiente por aprobar" | Sí | Los pedidos de **todas las sedes** de la empresa. |
 | **Administrador de Empresa** | No | No | Solo lectura de catálogo y reportes de toda la empresa. |
 
 Los tres primeros se asignan desde el formulario de creación. El *Administrador de Empresa* se gestiona con el equipo técnico.
@@ -45,6 +45,8 @@ La lista de precios se hereda automáticamente (sede o empresa); no se configura
 
 :::warning Roles con aprobación
 El **Supervisor** aprueba/rechaza pedidos de **todos** los creadores de su sede; el **Administrador de Contrato** hace lo mismo en **todas las sedes** de la empresa. Asígnalos con criterio.
+
+El Supervisor también puede administrar usuarios, pero **solo de su propia sede** y **solo con rol Creador de pedidos**: no puede crear otros roles, mover usuarios a otra sede ni ver o eliminar usuarios de otras sedes.
 :::
 
 ## Personal interno (asesores y repartidores)

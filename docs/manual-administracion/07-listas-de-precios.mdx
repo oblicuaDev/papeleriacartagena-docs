@@ -11,7 +11,7 @@ Una lista de precios fija un precio por producto para un grupo de empresas, sin 
 **Ruta:** `/admin/listas-precios`
 
 :::info Precios con IVA incluido
-Todos los precios de la lista se cargan **con IVA incluido**, igual que el precio base del catálogo. En el catálogo del cliente, el checkout, el detalle del pedido, los PDF y los reportes el sistema muestra el desglose: `Subtotal = Total ÷ 1,19` · `IVA (19%) = Total − Subtotal`.
+Todos los precios de la lista se cargan **con IVA incluido**, igual que el precio base del catálogo. En el catálogo del cliente, el checkout, el detalle del pedido, los PDF y los reportes el sistema muestra el desglose según la tasa de IVA de cada producto (0%, 5% o 19%): `Subtotal = Total ÷ (1 + tasa)` · `IVA = Total − Subtotal`.
 :::
 
 ## Pantalla principal

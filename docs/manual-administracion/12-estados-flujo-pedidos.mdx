@@ -11,26 +11,30 @@ description: Ciclo de vida completo de un pedido y quién puede mover cada trans
 ```
                  (aprueba supervisor / admin. de contrato / admin)
 Pendiente por aprobar ───────────────────────────► Validar disponibilidad ──► Alistamiento ──► En Ruta ──► Entregado
-        │                                                    ▲
-        └──► Rechazado ──(admin)──► Pendiente ───────────────┘
+        │                                                    ▲                    (cualquier pedido aprobado)
+        └──► Rechazado ──(admin)──► Pendiente ───────────────┘                          │
+                                                                                En reclamación ──► Devuelto
 ```
 
-- Un pedido creado por un **Creador de pedidos** nace en **"Pendiente por aprobar"**.
-- Un pedido creado por un **Supervisor** o un **Administrador de Contrato** nace directo en **"Validar disponibilidad"** (se autoaprueban).
-- Al aprobar, el pedido pasa **directamente a "Validar disponibilidad"** (ya no existe un paso intermedio por "Pendiente").
+- **Todo pedido de cliente nace en "Pendiente por aprobar"**, sea quien sea que lo cree (Creador, Supervisor o Administrador de Contrato). Ya no hay autoaprobación.
+- Al aprobar, el pedido pasa **directamente a "Validar disponibilidad"** (ya no existe un paso intermedio por "Pendiente") y en ese momento se genera la orden de compra.
+- **Un pedido aprobado queda cerrado**: nadie modifica sus ítems (ni el asesor ni el administrador). Solo se editan mientras está "Pendiente por aprobar" (o "Pendiente" legacy).
+- Los estados **"En reclamación"** y **"Devuelto"** los produce el módulo de [Reclamos](./16-reclamos.mdx).
 - **"Pendiente"** quedó como estado *legacy*: solo aparece en pedidos antiguos o cuando un administrador revierte un "Rechazado". Un admin puede empujarlo a "Validar disponibilidad".
 
 ## Descripción de cada estado
 
 | Estado | Significado | Quién lo produce |
 |---|---|---|
-| **Pendiente por aprobar** | Espera aprobación. | Automático al crear un pedido de un Creador de pedidos. |
+| **Pendiente por aprobar** | Espera aprobación (se muestra en amarillo). | Automático al crear cualquier pedido de cliente. |
 | **Rechazado** | Se rechazó el pedido (con motivo). | Supervisor, Administrador de Contrato o Administrador. |
 | **Pendiente** (legacy) | Estado histórico de "aprobado" del flujo anterior. | Reversión de un "Rechazado" por un Administrador. |
-| **Validar disponibilidad** | El asesor verifica stock y ajusta ítems. | Aprobación del pedido, o creación por Supervisor / Administrador de Contrato. |
+| **Validar disponibilidad** | El asesor verifica y asigna repartidor (sin modificar ítems). | Aprobación del pedido. |
 | **Alistamiento** | Bodega prepara el pedido (picking/empaque). | Asesor o Administrador; **también automáticamente** al asignar un repartidor. |
 | **En Ruta** | Pedido despachado, en camino. | Administrador o Repartidor. |
 | **Entregado** | Estado final del flujo. | Repartidor o Administrador. |
+| **En reclamación** | Hay al menos un reclamo abierto sobre el pedido. | Automático al crearse un reclamo. |
+| **Devuelto** | El pedido fue devuelto. No cuenta en consolidados ni presupuesto. | Administrador o Asesor desde el reclamo. |
 
 ## Quién mueve cada transición
 
@@ -55,7 +59,11 @@ Un pedido Rechazado no avanza solo: un administrador debe devolverlo manualmente
 :::
 
 :::info Edición de ítems
-Se pueden ajustar cantidades o quitar productos mientras el pedido **no haya entrado a "Alistamiento"** ("Pendiente por aprobar", "Pendiente" legacy o "Validar disponibilidad"). Aplica a administradores, asesores y a los roles cliente que pueden editar (Creador sobre el suyo, Supervisor en su sede, Administrador de Contrato en la empresa). Ver [Gestión de pedidos](./11-gestion-pedidos.mdx).
+Las cantidades se ajustan o se quitan productos **solo mientras el pedido está "Pendiente por aprobar"** (o "Pendiente" legacy): el Administrador y, desde el lado cliente, el Creador (sobre el suyo), el Supervisor (en su sede) y el Administrador de Contrato (en la empresa). **Una vez aprobado, el pedido queda cerrado y nadie lo edita**, tampoco el asesor. Ver [Gestión de pedidos](./11-gestion-pedidos.mdx).
+:::
+
+:::info Presupuesto del contrato
+El presupuesto consumido que ve el cliente suma los pedidos **aprobados** del año (todo excepto "Pendiente por aprobar", "Rechazado", "Borrador" y "Devuelto"), no solo los entregados.
 :::
 
 :::tip Asignar repartidor = Alistamiento
