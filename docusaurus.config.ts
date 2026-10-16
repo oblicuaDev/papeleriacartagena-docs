@@ -15,9 +15,9 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://oblicuaDev.github.io',
+  url: 'manualpc.oblicua.co',
   // Set the /<baseUrl>/ pathname under which your site is served
-  baseUrl: '/papeleriacartagena-docs/',
+  baseUrl: '/',
 
   // GitHub Pages deployment config.
   organizationName: 'oblicuaDev',
