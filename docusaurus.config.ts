@@ -15,7 +15,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'manualpc.oblicua.co',
+  url: 'https://manualpc.oblicua.co',
   // Set the /<baseUrl>/ pathname under which your site is served
   baseUrl: '/',
 
