@@ -64,7 +64,16 @@ Es probable que su empresa tenga un [Contrato](./contratos.mdx) vigente que rest
 Solo un Administrador puede devolverlo a "Pendiente". Ver [Estados del flujo](./12-estados-flujo-pedidos.mdx).
 
 **Necesito quitar un producto por falta de stock.**
-Solo se puede mientras el pedido está **"Pendiente por aprobar"** (o "Pendiente" legacy): edita los ítems e indica el motivo. Una vez aprobado el pedido queda cerrado y nadie lo edita; si hace falta, recházalo para que el cliente cree uno nuevo.
+Solo se puede mientras el pedido está **"Pendiente por aprobar"** (o "Pendiente" legacy): edita los ítems e indica el motivo. Si ya fue aprobado pero sigue en **"Validar disponibilidad"**, primero **revoca la aprobación**, corrígelo y apruébalo de nuevo. Si ya entró a "Alistamiento", no se puede modificar.
+
+**El cliente olvidó un producto en su pedido.**
+Mientras el pedido esté **"Pendiente por aprobar"**, usa **"Modificar pedido" → "Agregar productos"**; no hace falta crear un pedido nuevo. Si ya está aprobado y sigue en "Validar disponibilidad", revoca la aprobación primero.
+
+**No encuentro un producto en el buscador "Agregar productos".**
+El buscador solo muestra lo que ese cliente puede pedir: productos activos, de categorías activas y dentro de su contrato vigente. Revisa el producto en el [Catálogo](./05-catalogo-productos.mdx) o el [Contrato](./contratos.mdx) de la empresa.
+
+**No aparece el botón "Revocar aprobación".**
+Solo aparece con el pedido en "Validar disponibilidad" y para el Administrador, el Supervisor de la sede o el Administrador de Contrato de la empresa. Si el pedido ya está en "Alistamiento" o más adelante, ya no se puede revocar.
 
 **Un Creador de pedidos no ve su pedido recién enviado.**
 Debe buscarlo en la pestaña **"Pendientes por aprobar"** de su listado; hasta que lo aprueben no aparece en "Todos".

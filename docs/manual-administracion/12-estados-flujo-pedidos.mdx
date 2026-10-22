@@ -11,14 +11,15 @@ description: Ciclo de vida completo de un pedido y quién puede mover cada trans
 ```
                  (aprueba supervisor / admin. de contrato / admin)
 Pendiente por aprobar ───────────────────────────► Validar disponibilidad ──► Alistamiento ──► En Ruta ──► Entregado
-        │                                                    ▲                    (cualquier pedido aprobado)
-        └──► Rechazado ──(admin)──► Pendiente ───────────────┘                          │
-                                                                                En reclamación ──► Devuelto
+     │      ▲                                         │      ▲                    (cualquier pedido aprobado)
+     │      └────────── (revocar aprobación) ─────────┘      │                                  │
+     └──► Rechazado ──(admin)──► Pendiente ──────────────────┘                        En reclamación ──► Devuelto
 ```
 
 - **Todo pedido de cliente nace en "Pendiente por aprobar"**, sea quien sea que lo cree (Creador, Supervisor o Administrador de Contrato). Ya no hay autoaprobación.
 - Al aprobar, el pedido pasa **directamente a "Validar disponibilidad"** (ya no existe un paso intermedio por "Pendiente") y en ese momento se genera la orden de compra.
 - **Un pedido aprobado queda cerrado**: nadie modifica sus ítems (ni el asesor ni el administrador). Solo se editan mientras está "Pendiente por aprobar" (o "Pendiente" legacy).
+- Si hay que corregir un pedido ya aprobado que **todavía no entró a "Alistamiento"**, se puede **revocar la aprobación**: vuelve a "Pendiente por aprobar", se corrige y se aprueba de nuevo (ver [Revocar la aprobación](#revocar-la-aprobación)).
 - Los estados **"En reclamación"** y **"Devuelto"** los produce el módulo de [Reclamos](./16-reclamos.mdx).
 - **"Pendiente"** quedó como estado *legacy*: solo aparece en pedidos antiguos o cuando un administrador revierte un "Rechazado". Un admin puede empujarlo a "Validar disponibilidad".
 
@@ -34,7 +35,7 @@ Los supervisores y administradores de contrato aprueban desde **Aprobar Pedidos*
 
 | Estado | Significado | Quién lo produce |
 |---|---|---|
-| **Pendiente por aprobar** | Espera aprobación (se muestra en amarillo). | Automático al crear cualquier pedido de cliente. |
+| **Pendiente por aprobar** | Espera aprobación (se muestra en amarillo). | Automático al crear cualquier pedido de cliente; también al **revocar la aprobación**. |
 | **Rechazado** | Se rechazó el pedido (con motivo). | Supervisor, Administrador de Contrato o Administrador. |
 | **Pendiente** (legacy) | Estado histórico de "aprobado" del flujo anterior. | Reversión de un "Rechazado" por un Administrador. |
 | **Validar disponibilidad** | El asesor verifica y asigna repartidor (sin modificar ítems). | Aprobación del pedido. |
@@ -48,9 +49,9 @@ Los supervisores y administradores de contrato aprueban desde **Aprobar Pedidos*
 
 | Rol | Transiciones permitidas |
 |---|---|
-| **Administrador** | Todas: "Pendiente por aprobar → Validar disponibilidad / Rechazado", "Rechazado → Pendiente", "Pendiente → Validar disponibilidad", "Validar disponibilidad → Alistamiento", "Alistamiento → En Ruta", "En Ruta → Entregado". |
+| **Administrador** | Todas: "Pendiente por aprobar → Validar disponibilidad / Rechazado", revocar aprobación "Validar disponibilidad → Pendiente por aprobar", "Rechazado → Pendiente", "Pendiente → Validar disponibilidad", "Validar disponibilidad → Alistamiento", "Alistamiento → En Ruta", "En Ruta → Entregado". |
 | **Asesor comercial** | "Validar disponibilidad → Alistamiento" (y "Pendiente" legacy → "Validar disponibilidad"). Con **cobertura total**, sobre pedidos de cualquier vendedor. |
-| **Supervisor** / **Administrador de Contrato** | "Pendiente por aprobar → Validar disponibilidad" o "→ Rechazado". El Supervisor solo en su sede; el Administrador de Contrato en toda la empresa. |
+| **Supervisor** / **Administrador de Contrato** | "Pendiente por aprobar → Validar disponibilidad" o "→ Rechazado", y revocar aprobación "Validar disponibilidad → Pendiente por aprobar". El Supervisor solo en su sede; el Administrador de Contrato en toda la empresa. |
 | **Repartidor** | "Alistamiento → En Ruta" · "En Ruta → Entregado". |
 
 ## Cómo cambiar el estado
@@ -67,7 +68,36 @@ Un pedido Rechazado no avanza solo: un administrador debe devolverlo manualmente
 :::
 
 :::info[Edición de ítems]
-Las cantidades se ajustan o se quitan productos **solo mientras el pedido está "Pendiente por aprobar"** (o "Pendiente" legacy): el Administrador y, desde el lado cliente, el Creador (sobre el suyo), el Supervisor (en su sede) y el Administrador de Contrato (en la empresa). **Una vez aprobado, el pedido queda cerrado y nadie lo edita**, tampoco el asesor. Ver [Gestión de pedidos](./11-gestion-pedidos.mdx).
+Las cantidades se ajustan, se quitan productos o se **agregan productos nuevos** **solo mientras el pedido está "Pendiente por aprobar"** (o "Pendiente" legacy): el Administrador y, desde el lado cliente, el Creador (sobre el suyo), el Supervisor (en su sede) y el Administrador de Contrato (en la empresa). **Una vez aprobado, el pedido queda cerrado y nadie lo edita**, tampoco el asesor. Ver [Gestión de pedidos](./11-gestion-pedidos.mdx).
+:::
+
+## Revocar la aprobación
+
+Permite corregir un pedido ya aprobado **antes de que empiece el alistamiento**.
+
+- **Cuándo:** solo con el pedido en **"Validar disponibilidad"**. Si ya está en "Alistamiento" o más adelante, la opción no aparece y el sistema la rechaza.
+- **Quién:** los mismos que pueden aprobarlo: Administrador, Supervisor (pedidos de su sede) y Administrador de Contrato (pedidos de su empresa). El asesor no revoca.
+- **Cómo:** en el detalle del pedido, botón **"Revocar aprobación"** → indicar el **motivo** (obligatorio) → **"Sí, revocar"**.
+
+![Pedido en "Validar disponibilidad": botón "Revocar aprobación" en la parte superior del detalle.](pathname:///papeleriacartagena-docs/img/revocar_1.png)
+*Pedido en "Validar disponibilidad": botón "Revocar aprobación" en la parte superior del detalle.*
+
+![Confirmación de la revocación con el motivo obligatorio.](pathname:///papeleriacartagena-docs/img/revocar_2.png)
+*Confirmación de la revocación con el motivo obligatorio.*
+
+Al confirmar:
+
+1. El pedido vuelve a **"Pendiente por aprobar"** y reaparece en **Aprobar Pedidos**.
+2. La **orden de compra** generada al aprobar queda sin efecto (se elimina) y se genera de nuevo, con los ítems corregidos, cuando el pedido se vuelva a aprobar.
+3. El pedido se puede editar otra vez (cantidades, quitar o agregar productos).
+4. Deja de contar en el presupuesto del contrato hasta que se apruebe de nuevo.
+5. Queda en el **historial del pedido** quién revocó, la fecha y hora y el motivo, y en el detalle del cliente se muestra **"Aprobación revocada por …"**.
+
+![Vista del cliente tras la revocación: el pedido vuelve a "Pendiente por aprobar", con "Aprobación revocada por" y los botones para aprobar de nuevo.](pathname:///papeleriacartagena-docs/img/revocar_3.png)
+*Vista del cliente tras la revocación: el pedido vuelve a "Pendiente por aprobar", con "Aprobación revocada por" y los botones para aprobar de nuevo.*
+
+:::note[Validación en el servidor]
+Las condiciones (estado y permisos) se validan también en el servidor, no solo en la pantalla. Si dos personas revocan al mismo tiempo, solo una se aplica; la otra recibe el aviso de que el pedido ya está pendiente de aprobación.
 :::
 
 :::info[Presupuesto del contrato]

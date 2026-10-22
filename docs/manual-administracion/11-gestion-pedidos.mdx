@@ -23,7 +23,17 @@ description: Cómo consultar, editar y dar seguimiento a los pedidos desde el pa
 
 **Cambio de estado:** desplegable con los estados posibles según el rol del usuario, motivo opcional y botón **"Guardar estado"** (ver [Estados del flujo](./12-estados-flujo-pedidos.mdx)).
 
-**Ítems del pedido:** tabla de SKU, cantidad, unidad, precio y total. Las cantidades se pueden **escribir directamente** además de usar los botones + / –. La tabla incluye la columna **IVA %** de cada línea. Se pueden ajustar cantidades o quitar productos (con motivo) **solo mientras el pedido está "Pendiente por aprobar"** (botón **"Modificar pedido"**). Una vez aprobado queda cerrado y no se edita. Cada cambio queda registrado en el historial.
+**Ítems del pedido:** tabla de SKU, cantidad, unidad, precio y total. Las cantidades se pueden **escribir directamente** además de usar los botones + / –. La tabla incluye la columna **IVA %** de cada línea. Se pueden ajustar cantidades, quitar productos o **agregar productos nuevos** (con motivo) **solo mientras el pedido está "Pendiente por aprobar"** (botón **"Modificar pedido"**). Una vez aprobado queda cerrado y no se edita. Cada cambio queda registrado en el historial.
+
+**Agregar productos a un pedido:** en modo **"Modificar pedido"** aparece el buscador **"Agregar productos"** (por nombre o SKU). Muestra solo los productos que ese cliente puede pedir: activos, dentro de su contrato vigente y con el precio de su lista de precios. Clic en **"Agregar"**; el producto entra con cantidad 1, marcado como **"nuevo"**, y la cantidad se ajusta en la tabla. Los totales y el desglose de IVA se recalculan al momento. Al **"Guardar cambios"** el sistema confirma el precio final. Un producto agregado por error se quita con **"Quitar"** antes de guardar.
+
+![Buscador "Agregar productos" en modo "Modificar pedido": muestra precio e IVA del cliente.](pathname:///papeleriacartagena-docs/img/agregar_productos_1.png)
+*Buscador "Agregar productos" en modo "Modificar pedido": muestra precio e IVA del cliente.*
+
+![Producto agregado (marcado "nuevo") con cantidad ajustada, totales recalculados y motivo de la modificación.](pathname:///papeleriacartagena-docs/img/agregar_productos_2.png)
+*Producto agregado (marcado "nuevo") con cantidad ajustada, totales recalculados y motivo de la modificación.*
+
+**Revocar aprobación:** si el pedido está en **"Validar disponibilidad"** (aprobado pero sin iniciar alistamiento) aparece el botón **"Revocar aprobación"**, que lo devuelve a "Pendiente por aprobar" para corregirlo. Ver [Revocar la aprobación](./12-estados-flujo-pedidos.mdx#revocar-la-aprobación).
 
 **Descargas:** botones **"Orden de compra PDF"** y **"Plantilla Excel"** del pedido (con membrete de Papelería Cartagena). El cliente tiene además su propia descarga sin membrete — ver [Descarga de órdenes y reportes](./13-descarga-ordenes-reportes.mdx).
 

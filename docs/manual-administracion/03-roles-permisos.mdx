@@ -68,9 +68,9 @@ Ve solo sus pedidos asignados, en los estados Alistamiento, En Ruta y Entregado.
 
 | Rol | Transiciones permitidas |
 |---|---|
-| Administrador | Todas: incluye "Pendiente por aprobar → Validar disponibilidad / Rechazado", revertir "Rechazado → Pendiente" y "Pendiente (legacy) → Validar disponibilidad". |
+| Administrador | Todas: incluye "Pendiente por aprobar → Validar disponibilidad / Rechazado", revocar aprobación "Validar disponibilidad → Pendiente por aprobar", revertir "Rechazado → Pendiente" y "Pendiente (legacy) → Validar disponibilidad". |
 | Asesor comercial | Validar disponibilidad → Alistamiento (y "Pendiente" legacy → Validar disponibilidad). |
-| Supervisor / Administrador de Contrato | Pendiente por aprobar → Validar disponibilidad / Rechazado (el Supervisor solo en su sede). |
+| Supervisor / Administrador de Contrato | Pendiente por aprobar → Validar disponibilidad / Rechazado, y revocar aprobación Validar disponibilidad → Pendiente por aprobar (el Supervisor solo en su sede). |
 | Repartidor | Alistamiento → En Ruta · En Ruta → Entregado. |
 
 Detalle completo en [Estados del flujo de pedidos](./12-estados-flujo-pedidos.mdx).
