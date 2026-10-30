@@ -17,6 +17,7 @@ Pendiente por aprobar ───────────────────�
 ```
 
 - **Todo pedido de cliente nace en "Pendiente por aprobar"**, sea quien sea que lo cree (Creador, Supervisor o Administrador de Contrato). Ya no hay autoaprobación.
+- Si el **Administrador de Contrato** crea el pedido **a nombre de otra sede**, el pedido pertenece a esa sede: lo aprueba el Supervisor de esa sede (o el Administrador de Contrato) y sigue el mismo flujo. El autor sigue siendo el Administrador de Contrato.
 - Al aprobar, el pedido pasa **directamente a "Validar disponibilidad"** (ya no existe un paso intermedio por "Pendiente") y en ese momento se genera la orden de compra.
 - **Un pedido aprobado queda cerrado**: nadie modifica sus ítems (ni el asesor ni el administrador). Solo se editan mientras está "Pendiente por aprobar" (o "Pendiente" legacy).
 - Si hay que corregir un pedido ya aprobado que **todavía no entró a "Alistamiento"**, se puede **revocar la aprobación**: vuelve a "Pendiente por aprobar", se corrige y se aprueba de nuevo (ver [Revocar la aprobación](#revocar-la-aprobación)).
