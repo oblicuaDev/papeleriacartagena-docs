@@ -47,11 +47,11 @@ El rol **Administrador** ya tiene esta cobertura de fábrica sobre todos los ped
 |---|---|---|---|
 | **Creador de pedidos** | Sí (quedan "Pendiente por aprobar") | No | Solo sus propios pedidos. |
 | **Supervisor** | Sí (quedan "Pendiente por aprobar") | Sí | Los pedidos, usuarios y datos de **su sede** únicamente. |
-| **Administrador de Contrato** | Sí (quedan "Pendiente por aprobar"), también **a nombre de cualquier sede** de su empresa | Sí | Los pedidos de **todas las sedes** de su empresa. |
+| **Administrador de Contrato** | Sí (quedan "Pendiente por aprobar"), también **a nombre de otro usuario** de su empresa | Sí | Los pedidos de **todas las sedes** de su empresa. |
 | **Administrador de Empresa** | No | No | Solo lectura: catálogo y reportes de toda la empresa. |
 
 - **Todo pedido de cliente nace "Pendiente por aprobar"**, sin importar el rol de quien lo crea. Lo aprueba un Supervisor de la sede del pedido, un Administrador de Contrato de la empresa o un Administrador del sistema. Ya no existe la autoaprobación.
-- El **Administrador de Contrato** puede hacer un pedido **a nombre de una sede**: en **"Confirmar pedido"** la elige en **"Sucursal del pedido"** (por defecto, la suya). El pedido queda a nombre de esa sede (sus precios, su asesor y su Supervisor, que lo aprueba) y el Administrador de Contrato figura como autor. El resto del flujo no cambia.
+- El **Administrador de Contrato** puede hacer un pedido **a nombre de otro usuario** de su empresa (lo suplanta): en **"Confirmar pedido"** lo elige en **"Pedido a nombre de"** (por defecto, él mismo). El pedido queda a nombre de ese usuario, como si él lo hubiera hecho: con su sede, sus precios, su asesor y su Supervisor, que lo aprueba. En el historial del pedido queda registrado que lo creó el Administrador de Contrato. El resto del flujo no cambia.
 - El **Creador de pedidos** ve sus pedidos pendientes en la pestaña **"Pendientes por aprobar"** de su listado (para saber que ya quedaron registrados y no duplicarlos). Para los demás roles cliente, los pendientes aparecen solo en **"Aprobar pedidos"**.
 - El **Supervisor** está restringido a su sede: solo ve su sede en empresas/sucursales, solo lista, crea, edita y elimina usuarios de su sede, y únicamente puede crear o gestionar usuarios **Creador de pedidos**.
 - Vista del Creador de pedidos con su pestaña de pendientes:
